@@ -3,54 +3,58 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>减肥计划表 · 本地保存 · 基于 ISSN 2026 减重立场声明</title>
-<meta name="description" content="填自己的信息，自动生成 12 周减重计划表 + 每周记录表，数据只存在你本机浏览器（localStorage），不上传服务器。依据 ISSN 2026 减重饮食立场声明设计。">
+<title>减肥计划表 · 每周记录 · 每日饮食打卡（本地保存）</title>
+<meta name="description" content="填自己的信息自动生成 12 周减重计划；每周记录体重围度；每日饮食打卡自动累计热量与蛋白。数据只存在本机浏览器 localStorage，不上传服务器。依据 ISSN 2026 减重饮食立场声明。">
 <meta name="theme-color" content="#0d1117">
 <style>
 :root{
   --bg:#0d1117; --card:#161d26; --card2:#1d2734; --line:#2a3746;
   --text:#e8eef5; --muted:#95a6ba; --dim:#6b7c91;
-  --green:#4ade80; --blue:#38bdf8; --amber:#fbbf24; --red:#f87171;
+  --green:#4ade80; --blue:#38bdf8; --amber:#fbbf24; --red:#f87171; --violet:#a78bfa;
   --r:14px;
 }
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{-webkit-text-size-adjust:100%}
-body{
-  margin:0;background:var(--bg);color:var(--text);
-  font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  padding-bottom:40px;
-}
+body{margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;padding-bottom:40px}
 a{color:var(--blue);text-decoration:none}
 .wrap{max-width:900px;margin:0 auto;padding:0 14px}
-.topbar{position:sticky;top:0;z-index:40;background:rgba(13,17,23,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
-.topbar .inner{max-width:900px;margin:0 auto;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.brand{font-weight:800;font-size:15px;letter-spacing:.2px;white-space:nowrap}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(13,17,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .inner{max-width:900px;margin:0 auto;padding:9px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;font-size:15px;white-space:nowrap}
 .brand span{color:var(--green)}
 .top-links{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card2);color:var(--text);
+  border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;font-family:inherit}
 .btn:active{transform:scale(.98)}
 .btn.primary{background:var(--green);border-color:var(--green);color:#06240f}
 .btn.ghost{background:transparent}
 .btn.sm{padding:6px 10px;font-size:12.5px}
 .btn.danger{color:var(--red);border-color:rgba(248,113,113,.4)}
-h1{font-size:21px;margin:20px 0 6px;letter-spacing:.2px}
-.sub{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+.tabs{position:sticky;top:49px;z-index:35;background:rgba(13,17,23,.95);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.tabs .inner{max-width:900px;margin:0 auto;padding:0 8px;display:flex;gap:2px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{flex:0 0 auto;background:none;border:none;color:var(--muted);padding:11px 14px;font-size:14px;font-weight:700;
+  cursor:pointer;border-bottom:2px solid transparent;font-family:inherit;white-space:nowrap}
+.tab.on{color:var(--green);border-bottom-color:var(--green)}
+h1{font-size:21px;margin:18px 0 6px}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 14px}
 section{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:14px 0}
-.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap}
 .sec-head .n{width:22px;height:22px;border-radius:7px;background:rgba(74,222,128,.15);color:var(--green);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
 .sec-head .t{font-weight:800;font-size:15.5px}
 .sec-head .hint{margin-left:auto;font-size:12px;color:var(--dim)}
 label{display:block;font-size:12.5px;color:var(--dim);margin-bottom:4px}
-input,select{width:100%;background:#0b1119;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 12px;font-size:16px;font-family:inherit;}
+input,select{width:100%;background:#0b1119;border:1px solid var(--line);color:var(--text);border-radius:10px;
+  padding:11px 12px;font-size:16px;font-family:inherit}
 input:focus,select:focus{outline:none;border-color:var(--blue)}
 input[type=date]{min-height:44px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
-.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:10px;margin-top:12px}
 .metric{background:#0b1119;border:1px solid var(--line);border-radius:12px;padding:12px}
 .metric .big{font-size:19px;font-weight:800;color:var(--green);line-height:1.25}
 .metric .lbl{font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.35}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
 .tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
 th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
 th{background:var(--card2);font-size:12px;color:#cfe0f0;white-space:nowrap}
 tr:last-child td{border-bottom:none}
@@ -58,12 +62,13 @@ td.num{text-align:right;font-variant-numeric:tabular-nums}
 .plan-tbl td:first-child{font-weight:700;white-space:nowrap}
 .plan-tbl tr.now{background:rgba(74,222,128,.08)}
 .plan-tbl tr.now td:first-child{color:var(--green)}
-.log-tbl input{padding:7px 8px;font-size:16px;border-radius:8px;min-width:64px}
+.log-tbl input{padding:7px 8px;border-radius:8px;min-width:62px}
 .log-tbl td{padding:6px}
 .log-tbl .del{background:transparent;border:none;color:var(--red);font-size:17px;cursor:pointer;padding:0 4px}
-.pbar{height:9px;background:#0b1119;border:1px solid var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
-.pbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--blue));width:0;transition:width .4s}
-.pinfo{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:6px}
+.pbar{height:9px;background:#0b1119;border:1px solid var(--line);border-radius:99px;overflow:hidden}
+.pbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--blue));width:0;transition:width .35s}
+.pbar.violet>i{background:linear-gradient(90deg,var(--violet),#818cf8)}
+.pinfo{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:6px;gap:8px}
 canvas{width:100%;height:170px;display:block;margin-top:10px}
 .tip{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:11px 13px;font-size:13px;color:#cbe7f7;margin-top:12px}
 .tip.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.3);color:#f5e2b0}
@@ -74,18 +79,40 @@ canvas{width:100%;height:170px;display:block;margin-top:10px}
 footer{color:var(--dim);font-size:12px;text-align:center;padding:24px 14px 10px;line-height:1.8}
 .badge{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:11px}
 .empty{color:var(--dim);font-size:13px;text-align:center;padding:16px}
+.datebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.datebar input[type=date]{max-width:168px}
+.totals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:14px 0 4px}
+.totbox{background:#0b1119;border:1px solid var(--line);border-radius:12px;padding:12px}
+.totbox .row1{display:flex;justify-content:space-between;align-items:baseline;font-size:12.5px;color:var(--dim);gap:8px}
+.totbox .v{font-size:18px;font-weight:800;color:var(--green);font-variant-numeric:tabular-nums}
+.totbox.warn .v{color:var(--amber)}
+.totbox.over .v{color:var(--red)}
+.meal{background:#0b1119;border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px}
+.meal .mhead{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.meal .tag{font-size:11.5px;font-weight:800;color:var(--green);background:rgba(74,222,128,.12);border-radius:6px;padding:3px 7px}
+.meal .mname{font-weight:700;font-size:14px}
+.meal .mk{margin-left:auto;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.meal .mrow{display:grid;grid-template-columns:1fr 92px 78px;gap:8px;margin-top:6px}
+.meal .mrow input{padding:9px 10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{background:var(--card2);border:1px solid var(--line);border-radius:99px;padding:5px 10px;font-size:12px;color:var(--muted);cursor:pointer}
+.chip:active{border-color:var(--green);color:var(--text)}
+.week7{margin-top:12px}
+.hidden{display:none!important}
 @media (max-width:420px){
   h1{font-size:19px}
   section{padding:13px}
   .metric .big{font-size:17px}
+  .meal .mrow{grid-template-columns:1fr 80px 66px}
+  .totals{grid-template-columns:1fr}
 }
 @media print{
-  .topbar,.btn,footer .no-print{display:none}
+  .topbar,.tabs,.btn,footer .no-print{display:none}
   body{background:#fff;color:#000}
   section{border-color:#ccc;background:#fff}
   th{background:#eee;color:#000}
-  td,th{border-color:#ddd}
   input{border:none;background:#fff;color:#000}
+  .meal,.totbox{background:#fff;border-color:#ddd}
 }
 </style>
 </head>
@@ -101,82 +128,139 @@ footer{color:var(--dim);font-size:12px;text-align:center;padding:24px 14px 10px;
   </div>
 </div>
 
+<div class="tabs">
+  <div class="inner">
+    <button class="tab on" data-tab="plan">计划表</button>
+    <button class="tab" data-tab="log">每周记录</button>
+    <button class="tab" data-tab="diet">每日饮食</button>
+    <button class="tab" data-tab="data">数据</button>
+  </div>
+</div>
+
 <div class="wrap">
 
-<h1>你的 12 周减重计划表</h1>
-<p class="sub">填写自己的信息 → 自动生成计划与记录表。数据<b>只保存在你本机浏览器</b>（localStorage），不上传任何服务器。</p>
+<div id="pane-plan">
+  <h1>你的 12 周减重计划表</h1>
+  <p class="sub">填写自己的信息 → 自动生成计划。数据<b>只保存在你本机浏览器</b>（localStorage），不上传任何服务器。</p>
+  <section>
+    <div class="sec-head"><div class="n">1</div><div class="t">填你的信息</div><div class="hint">改完自动保存</div></div>
+    <div class="grid">
+      <div><label>性别</label><select id="sex"><option value="m">男</option><option value="f">女</option></select></div>
+      <div><label>年龄</label><input id="age" type="number" inputmode="numeric" min="14" max="90" placeholder="30"></div>
+      <div><label>身高（cm）</label><input id="ht" type="number" inputmode="decimal" placeholder="175"></div>
+      <div><label>当前体重（kg）</label><input id="wt" type="number" inputmode="decimal" step="0.1" placeholder="75"></div>
+      <div><label>目标体重（kg）</label><input id="goal" type="number" inputmode="decimal" step="0.1" placeholder="68"></div>
+      <div><label>活动水平</label>
+        <select id="act">
+          <option value="1.2">久坐（几乎不运动）</option>
+          <option value="1.375" selected>轻度（每周 1–3 次）</option>
+          <option value="1.55">中度（每周 3–5 次）</option>
+          <option value="1.725">高度（每周 6–7 次）</option>
+        </select></div>
+      <div><label>方案路径</label>
+        <select id="path">
+          <option value="A" selected>A 稳妥型（缺口 20–25%）</option>
+          <option value="B">B 运动型（缺口 15%，高蛋白）</option>
+          <option value="C">C 激进型（LED，需医生监督）</option>
+        </select></div>
+      <div><label>开始日期</label><input id="start" type="date"></div>
+    </div>
+    <div class="cards" id="metrics"></div>
+    <div class="tip" id="targetTip" style="display:none"></div>
+  </section>
+  <section>
+    <div class="sec-head"><div class="n">2</div><div class="t">12 周计划</div><div class="hint">按你的信息生成</div></div>
+    <div class="tw">
+      <table class="plan-tbl" id="planTable">
+        <thead><tr><th>周次</th><th>日期</th><th>热量</th><th>蛋白</th><th>训练</th><th>本周任务</th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div class="pills" id="planPills"></div>
+  </section>
+</div>
 
-<section>
-  <div class="sec-head"><div class="n">1</div><div class="t">填你的信息</div><div class="hint">改完自动保存</div></div>
-  <div class="grid">
-    <div><label>性别</label>
-      <select id="sex"><option value="m">男</option><option value="f">女</option></select></div>
-    <div><label>年龄</label><input id="age" type="number" inputmode="numeric" min="14" max="90" placeholder="30"></div>
-    <div><label>身高（cm）</label><input id="ht" type="number" inputmode="decimal" min="120" max="220" placeholder="175"></div>
-    <div><label>当前体重（kg）</label><input id="wt" type="number" inputmode="decimal" step="0.1" min="30" max="250" placeholder="75"></div>
-    <div><label>目标体重（kg）</label><input id="goal" type="number" inputmode="decimal" step="0.1" min="30" max="250" placeholder="68"></div>
-    <div><label>活动水平</label>
-      <select id="act">
-        <option value="1.2">久坐（几乎不运动）</option>
-        <option value="1.375" selected>轻度（每周 1–3 次）</option>
-        <option value="1.55">中度（每周 3–5 次）</option>
-        <option value="1.725">高度（每周 6–7 次）</option>
-      </select></div>
-    <div><label>方案路径</label>
-      <select id="path">
-        <option value="A" selected>A 稳妥型（缺口 20–25%）</option>
-        <option value="B">B 运动型（缺口 15%，高蛋白）</option>
-        <option value="C">C 激进型（LED，需医生监督）</option>
-      </select></div>
-    <div><label>开始日期</label><input id="start" type="date"></div>
-  </div>
-  <div class="cards" id="metrics"></div>
-  <div class="tip" id="targetTip" style="display:none"></div>
-</section>
+<div id="pane-log" class="hidden">
+  <h1>每周记录</h1>
+  <p class="sub">每周固定一天、同样条件（晨起、空腹、排便后、同一台秤）测一次，体重建议取 7 日均值。</p>
+  <section>
+    <div class="sec-head"><div class="n">3</div><div class="t">体重与围度</div><div class="hint" id="logHint"></div></div>
+    <div class="pbar"><i id="pbarFill"></i></div>
+    <div class="pinfo"><span id="pStart">起点 —</span><span id="pNow">最新 —</span></div>
+    <div class="tw" style="margin-top:12px">
+      <table class="log-tbl" id="logTable">
+        <thead><tr><th>周</th><th>体重(kg)</th><th>腰围(cm)</th><th>体脂(%)</th><th>变化</th><th></th></tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center">
+      <button class="btn sm" id="addRow">＋ 加一行</button>
+      <button class="btn sm" id="fillWeeks">按 12 周补齐</button>
+      <span class="pill" style="margin-left:auto">进度条＝已减 / 目标减重</span>
+    </div>
+    <canvas id="chart"></canvas>
+  </section>
+</div>
 
-<section>
-  <div class="sec-head"><div class="n">2</div><div class="t">12 周计划</div><div class="hint">按你的信息生成</div></div>
-  <div class="tw">
-    <table class="plan-tbl" id="planTable">
-      <thead><tr><th>周次</th><th>日期</th><th>热量</th><th>蛋白</th><th>训练</th><th>本周任务</th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <div class="pills" id="planPills"></div>
-</section>
+<div id="pane-diet" class="hidden">
+  <h1>每日饮食打卡</h1>
+  <p class="sub">按餐记录，自动累计当天热量与蛋白并对照目标。<b>人普遍会低估摄入（论文：超重人群低报 25%–50%）</b>，尽量称重或按包装标注填。</p>
+  <section>
+    <div class="sec-head"><div class="n">4</div><div class="t">选日期</div></div>
+    <div class="datebar">
+      <button class="btn sm" id="prevDay">← 前一天</button>
+      <input id="day" type="date">
+      <button class="btn sm" id="nextDay">后一天 →</button>
+      <button class="btn sm" id="todayBtn">今天</button>
+      <button class="btn sm" id="copyPrev">复制前一天</button>
+    </div>
+    <div class="totals">
+      <div class="totbox" id="kcalBox">
+        <div class="row1"><span>热量</span><span id="kcalTarget">目标 —</span></div>
+        <div class="v" id="kcalVal">0 kcal</div>
+        <div class="pbar" style="margin-top:8px"><i id="kcalBar"></i></div>
+        <div class="pinfo"><span id="kcalLeft">—</span><span id="kcalPct"></span></div>
+      </div>
+      <div class="totbox" id="protBox">
+        <div class="row1"><span>蛋白质</span><span id="protTarget">目标 —</span></div>
+        <div class="v" id="protVal">0 g</div>
+        <div class="pbar violet" style="margin-top:8px"><i id="protBar"></i></div>
+        <div class="pinfo"><span id="protLeft">—</span><span id="protPct"></span></div>
+      </div>
+    </div>
+    <div id="meals"></div>
+    <div class="chips" id="quickChips"></div>
+    <div class="tip">蛋白优先：论文建议 <b>每天 ≥3 餐、每餐约 30–40 g 蛋白</b>；减脂期保肌目标 1.6–2.2 g/kg 体重。热量目标已按你选的路径算好。</div>
+  </section>
+  <section>
+    <div class="sec-head"><div class="n">5</div><div class="t">最近 7 天</div><div class="hint">以所选日期为终点</div></div>
+    <div class="week7">
+      <div class="tw">
+        <table id="week7Table">
+          <thead><tr><th>日期</th><th>热量</th><th>蛋白</th><th>蛋白达成</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="pills" id="week7Pills"></div>
+    </div>
+  </section>
+</div>
 
-<section>
-  <div class="sec-head"><div class="n">3</div><div class="t">每周记录</div><div class="hint" id="logHint"></div></div>
-  <div class="pbar"><i id="pbarFill"></i></div>
-  <div class="pinfo"><span id="pStart">起点 —</span><span id="pNow">最新 —</span></div>
-
-  <div class="tw" style="margin-top:12px">
-    <table class="log-tbl" id="logTable">
-      <thead><tr><th>周</th><th>体重(kg)</th><th>腰围(cm)</th><th>体脂(%)</th><th>变化</th><th></th></tr></thead>
-      <tbody></tbody>
-    </table>
-  </div>
-  <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center">
-    <button class="btn sm" id="addRow">＋ 加一行</button>
-    <button class="btn sm" id="fillWeeks">按 12 周补齐</button>
-    <span class="pill" style="margin-left:auto">体重建议取 7 日均值</span>
-  </div>
-  <canvas id="chart"></canvas>
-  <div class="tip">记录规则（论文）：<b>每周固定一天、同样条件</b>（晨起、空腹、排便后、同一台秤）。单日波动不代表失败，看趋势。</div>
-</section>
-
-<section>
-  <div class="sec-head"><div class="n">4</div><div class="t">数据管理</div><div class="hint">本地保存</div></div>
-  <p class="sub" style="margin-bottom:10px">所有内容存在你这台设备的浏览器里。换设备、清缓存前请先导出备份。</p>
-  <div style="display:flex;gap:8px;flex-wrap:wrap">
-    <button class="btn sm" id="exportBtn">⬇ 导出备份(JSON)</button>
-    <button class="btn sm" id="importBtn">⬆ 导入备份</button>
-    <button class="btn sm" id="printBtn">🖨 打印 / 存 PDF</button>
-    <button class="btn sm danger" id="clearBtn">清空全部数据</button>
-    <input type="file" id="importFile" accept="application/json" style="display:none">
-  </div>
-  <div class="tip warn" style="margin-top:12px"><b>隐私：</b>本页没有后端、不会上传。数据仅此浏览器可见；清除浏览器数据会一并删除。</div>
-</section>
+<div id="pane-data" class="hidden">
+  <h1>数据管理</h1>
+  <p class="sub">所有内容存在你这台设备的浏览器里。换设备、清缓存前请先导出备份。</p>
+  <section>
+    <div class="sec-head"><div class="n">6</div><div class="t">备份与清理</div></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn sm" id="exportBtn">⬇ 导出备份(JSON)</button>
+      <button class="btn sm" id="importBtn">⬆ 导入备份</button>
+      <button class="btn sm" id="printBtn">🖨 打印 / 存 PDF</button>
+      <button class="btn sm danger" id="clearBtn">清空全部数据</button>
+      <input type="file" id="importFile" accept="application/json" style="display:none">
+    </div>
+    <div class="tip warn" style="margin-top:12px"><b>隐私：</b>本页没有后端、不会上传。数据仅此浏览器可见；清除浏览器数据会一并删除。</div>
+  </section>
+</div>
 
 <footer>
   <div>计划逻辑依据：Aragon AA et al. <i>ISSN position stand: diets for body weight reduction</i>. JISSN 2026;23(1):2740266（CC BY）</div>
@@ -189,152 +273,139 @@ footer{color:var(--dim);font-size:12px;text-align:center;padding:24px 14px 10px;
 (function(){
   var KEY='jf-plan-v1';
   var $=function(id){return document.getElementById(id);};
-  function money(n){ return Math.round(n).toLocaleString('en-US'); }
-  function f1(n){ return (Math.round(n*10)/10).toFixed(1); }
-  function num(v){ var n=parseFloat(v); return isFinite(n)?n:null; }
+  function money(n){return Math.round(n).toLocaleString('en-US');}
+  function f1(n){return (Math.round(n*10)/10).toFixed(1);}
+  function num(v){var n=parseFloat(v);return isFinite(n)?n:null;}
+  function todayStr(){var d=new Date(),z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10);}
+  function shiftDate(s,days){var d=new Date(s+'T00:00:00');d.setDate(d.getDate()+days);
+    var z=new Date(d.getTime()-d.getTimezoneOffset()*60000);return z.toISOString().slice(0,10);}
+  function fmtDate(s){var d=new Date(s+'T00:00:00');return (d.getMonth()+1)+'月'+d.getDate()+'日';}
 
-  var S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:'',logs:[{w:0,wt:'',waist:'',bf:''}]};
+  var MEALS=[
+    {k:'b', tag:'早',  name:'早餐',           ph:'如：燕麦 50g + 鸡蛋 2 个 + 牛奶 250ml'},
+    {k:'s1',tag:'加',  name:'上午加餐',       ph:'如：希腊酸奶 150g'},
+    {k:'l', tag:'午',  name:'午餐',           ph:'如：米饭 150g + 鸡胸 150g + 青菜'},
+    {k:'s2',tag:'加',  name:'下午加餐',       ph:'如：乳清蛋白 1 勺 + 香蕉'},
+    {k:'d', tag:'晚',  name:'晚餐',           ph:'如：红薯 200g + 鱼 150g + 蔬菜'},
+    {k:'x', tag:'其他',name:'其他 / 零食',    ph:'如：坚果 20g（热量密度高，注意份量）'}
+  ];
+
+  var S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:'',
+         logs:[{w:0,wt:'',waist:'',bf:''}],days:{},tab:'plan',day:''};
 
   function load(){
-    try{
-      var raw=localStorage.getItem(KEY);
-      if(raw){ var d=JSON.parse(raw); for(var k in d){ if(d.hasOwnProperty(k)) S[k]=d[k]; } }
-    }catch(e){}
-    if(!S.start){ S.start=new Date().toISOString().slice(0,10); }
-    if(!Array.isArray(S.logs)||!S.logs.length){ S.logs=[{w:0,wt:'',waist:'',bf:''}]; }
+    try{var raw=localStorage.getItem(KEY);if(raw){var d=JSON.parse(raw);for(var k in d){if(d.hasOwnProperty(k))S[k]=d[k];}}}catch(e){}
+    if(!S.start)S.start=todayStr();
+    if(!Array.isArray(S.logs)||!S.logs.length)S.logs=[{w:0,wt:'',waist:'',bf:''}];
+    if(!S.days||typeof S.days!=='object')S.days={};
+    if(!S.day)S.day=todayStr();
+    if(!S.tab)S.tab='plan';
   }
-  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
   function calc(){
-    var sex=S.sex, wt=parseFloat(S.wt), ht=parseFloat(S.ht), age=parseFloat(S.age), act=parseFloat(S.act)||1.375;
-    if(!wt||!ht||!age) return null;
-    var bmr = sex==='m' ? 10*wt+6.25*ht-5*age+5 : 10*wt+6.25*ht-5*age-161;
-    var tdee = bmr*act, deficit, pLo, pHi, label;
-    if(S.path==='B'){ deficit=0.15; pLo=1.8; pHi=2.2; label='B 运动型'; }
-    else if(S.path==='C'){ deficit=0.30; pLo=1.5; pHi=2.0; label='C 激进型'; }
-    else { deficit=0.225; pLo=1.4; pHi=1.6; label='A 稳妥型'; }
-    var target = tdee*(1-deficit);
-    if(S.path==='C'){ target=Math.min(Math.max(target,800),1200); }
-    else if(target < bmr*1.1){ target=bmr*1.1; }
-    var weeklyLoss=(tdee-target)*7/7700;
-    var goalW=parseFloat(S.goal)||null;
+    var wt=parseFloat(S.wt),ht=parseFloat(S.ht),age=parseFloat(S.age),act=parseFloat(S.act)||1.375;
+    if(!wt||!ht||!age)return null;
+    var bmr=S.sex==='m'?10*wt+6.25*ht-5*age+5:10*wt+6.25*ht-5*age-161;
+    var tdee=bmr*act,deficit,pLo,pHi,label;
+    if(S.path==='B'){deficit=0.15;pLo=1.8;pHi=2.2;label='B 运动型';}
+    else if(S.path==='C'){deficit=0.30;pLo=1.5;pHi=2.0;label='C 激进型';}
+    else{deficit=0.225;pLo=1.4;pHi=1.6;label='A 稳妥型';}
+    var target=tdee*(1-deficit);
+    if(S.path==='C'){target=Math.min(Math.max(target,800),1200);}
+    else if(target<bmr*1.1){target=bmr*1.1;}
+    var weeklyLoss=(tdee-target)*7/7700,goalW=parseFloat(S.goal)||null;
     var goalLoss=goalW?(wt-goalW):null;
     var weeks=(goalLoss&&goalLoss>0&&weeklyLoss>0)?Math.ceil(goalLoss/weeklyLoss):null;
     return {bmr:bmr,tdee:tdee,target:target,label:label,weeklyLoss:weeklyLoss,goalLoss:goalLoss,weeks:weeks,
             protLo:Math.round(wt*pLo),protHi:Math.round(wt*pHi)};
   }
 
+  function renderTabs(){
+    Array.prototype.forEach.call(document.querySelectorAll('.tab'),function(b){
+      b.classList.toggle('on',b.dataset.tab===S.tab);
+      b.onclick=function(){S.tab=b.dataset.tab;save();renderTabs();if(S.tab==='log')setTimeout(drawChart,50);};
+    });
+    ['plan','log','diet','data'].forEach(function(t){$('pane-'+t).classList.toggle('hidden',S.tab!==t);});
+  }
+
   function renderMetrics(){
-    var c=calc(), box=$('metrics'), tip=$('targetTip');
-    if(!c){
-      box.innerHTML='<div class="empty" style="grid-column:1/-1">填上年龄、身高、体重后自动计算</div>';
-      tip.style.display='none'; return;
-    }
-    var items=[
-      ['基础代谢 BMR', money(c.bmr)+' kcal'],
-      ['维持热量 TDEE', money(c.tdee)+' kcal'],
-      ['每日目标热量', money(c.target)+' kcal'],
-      ['每日蛋白', c.protLo+'–'+c.protHi+' g'],
-      ['每餐蛋白参考', Math.round(c.protLo/3)+'–'+Math.round(c.protHi/3)+' g'],
-      ['预计减重速度', c.weeklyLoss.toFixed(2)+' kg/周']
-    ];
-    box.innerHTML=items.map(function(it){ return '<div class="metric"><div class="big">'+it[1]+'</div><div class="lbl">'+it[0]+'</div></div>'; }).join('');
+    var c=calc(),box=$('metrics'),tip=$('targetTip');
+    if(!c){box.innerHTML='<div class="empty" style="grid-column:1/-1">填上年龄、身高、体重后自动计算</div>';tip.style.display='none';return;}
+    var items=[['基础代谢 BMR',money(c.bmr)+' kcal'],['维持热量 TDEE',money(c.tdee)+' kcal'],
+      ['每日目标热量',money(c.target)+' kcal'],['每日蛋白',c.protLo+'–'+c.protHi+' g'],
+      ['每餐蛋白参考',Math.round(c.protLo/3)+'–'+Math.round(c.protHi/3)+' g'],['预计减重速度',c.weeklyLoss.toFixed(2)+' kg/周']];
+    box.innerHTML=items.map(function(it){return '<div class="metric"><div class="big">'+it[1]+'</div><div class="lbl">'+it[0]+'</div></div>';}).join('');
     tip.style.display='block';
     if(c.goalLoss&&c.goalLoss>0){
       tip.innerHTML='<b>'+c.label+'</b>：从 '+S.wt+' kg 到 '+S.goal+' kg，需减 <b>'+f1(c.goalLoss)+' kg</b>，按当前速度约 <b>'+c.weeks+' 周</b>（约 '+(c.weeks/4.3).toFixed(1)+' 个月）。'+
         (c.weeks>12?'超过 12 周属正常——论文建议每减 5–10 kg 插入 1–3 个月维持期再进下一轮。':'12 周内可达。');
-    } else if(c.goalLoss!==null && c.goalLoss<=0){
+    } else if(c.goalLoss!==null&&c.goalLoss<=0){
       tip.innerHTML='目标体重不低于当前体重，先设一个更具体的目标。';
     } else {
       tip.innerHTML='论文口径：<b>每周掉 0.5%–1% 体重</b>是稳妥区间；缺口越大掉得越快，瘦体重流失风险也越高。';
     }
-    if(S.path==='C'){ tip.innerHTML+='<br><b>激进型（LED 800–1200 kcal）高风险高收益，论文要求医学监督，请勿自行长期执行。</b>'; }
+    if(S.path==='C')tip.innerHTML+='<br><b>激进型（LED 800–1200 kcal）高风险高收益，论文要求医学监督，请勿自行长期执行。</b>';
   }
 
   var PLAN=[
-    {w:'第 0 周', k:0, kcal:'≈TDEE', prot:1.2, train:'抗阻 2 次 · 步数 6000–8000', task:'测基线：晨起空腹体重、腰围、臀围、照片；3 天饮食记录估真实摄入'},
-    {w:'第 1–2 周', k:1, kcal:'−15%', prot:1.4, train:'抗阻 3 次（全身复合）· 有氧 2×25 分', task:'只改两件事：蛋白达标 + 抗阻到位；体重取 7 日均值'},
-    {w:'第 3–4 周', k:3, kcal:'−20%', prot:1.6, train:'抗阻 3 次（渐进加重）· 步数 8000–10000', task:'周降幅 0.5%–1% 为合适；不动先查摄入记录，别急砍热量'},
-    {w:'第 5–6 周', k:5, kcal:'−22%', prot:1.7, train:'抗阻 3–4 次 · 有氧 3 次', task:'腰围比体重重要；力量明显下降 = 缺口过大或蛋白不足'},
-    {w:'第 7 周', k:7, kcal:'维持 7 天', prot:1.6, train:'抗阻照常 · 有氧减半', task:'diet break：每减 3–5 kg 安排一次，缓解心理疲劳与代谢适应'},
-    {w:'第 8–10 周', k:8, kcal:'−20%～−25%', prot:1.8, train:'抗阻 3–4 次 · 有氧 2–3 次', task:'易进平台期：腰围/照片/训练重量综合判断，别只看秤'},
-    {w:'第 11–12 周', k:11, kcal:'−10%', prot:1.6, train:'抗阻 4 次 · 维持强度', task:'进入维持期（1–3 个月）把体重钉住，再决定是否下一轮'}
+    {w:'第 0 周',k:0,kcal:'≈TDEE',p:1.2,train:'抗阻 2 次 · 步数 6000–8000',task:'测基线：晨起空腹体重、腰围、臀围、照片；3 天饮食记录估真实摄入'},
+    {w:'第 1–2 周',k:1,kcal:'−15%',p:1.4,train:'抗阻 3 次（全身复合）· 有氧 2×25 分',task:'只改两件事：蛋白达标 + 抗阻到位；体重取 7 日均值'},
+    {w:'第 3–4 周',k:3,kcal:'−20%',p:1.6,train:'抗阻 3 次（渐进加重）· 步数 8000–10000',task:'周降幅 0.5%–1% 为合适；不动先查摄入记录，别急砍热量'},
+    {w:'第 5–6 周',k:5,kcal:'−22%',p:1.7,train:'抗阻 3–4 次 · 有氧 3 次',task:'腰围比体重重要；力量明显下降 = 缺口过大或蛋白不足'},
+    {w:'第 7 周',k:7,kcal:'维持 7 天',p:1.6,train:'抗阻照常 · 有氧减半',task:'diet break：每减 3–5 kg 安排一次，缓解心理疲劳与代谢适应'},
+    {w:'第 8–10 周',k:8,kcal:'−20%～−25%',p:1.8,train:'抗阻 3–4 次 · 有氧 2–3 次',task:'易进平台期：腰围/照片/训练重量综合判断，别只看秤'},
+    {w:'第 11–12 周',k:11,kcal:'−10%',p:1.6,train:'抗阻 4 次 · 维持强度',task:'进入维持期（1–3 个月）把体重钉住，再决定是否下一轮'}
   ];
-
-  function dateOfWeek(off){
-    if(!S.start) return '—';
-    var d=new Date(S.start+'T00:00:00');
-    d.setDate(d.getDate()+off*7);
-    return (d.getMonth()+1)+'/'+d.getDate();
-  }
-
+  function dateOfWeek(off){if(!S.start)return '—';var d=new Date(S.start+'T00:00:00');d.setDate(d.getDate()+off*7);return (d.getMonth()+1)+'/'+d.getDate();}
   function kcalText(p,c){
-    if(!c) return p.kcal;
-    if(p.kcal==='≈TDEE') return '≈'+money(c.tdee)+' kcal';
-    if(p.kcal==='维持 7 天') return '≈'+money(c.tdee)+' kcal';
-    if(p.kcal.indexOf('−15')>=0) return '≈'+money(c.tdee*0.85)+' kcal';
-    if(p.kcal.indexOf('−20%～−25%')>=0) return '≈'+money(c.tdee*0.775)+' kcal';
-    if(p.kcal.indexOf('−22')>=0) return '≈'+money(c.tdee*0.78)+' kcal';
-    if(p.kcal.indexOf('−20')>=0) return '≈'+money(c.tdee*0.80)+' kcal';
-    if(p.kcal.indexOf('−10')>=0) return '≈'+money(c.tdee*0.90)+' kcal';
+    if(!c)return p.kcal;
+    if(p.kcal==='≈TDEE'||p.kcal==='维持 7 天')return '≈'+money(c.tdee)+' kcal';
+    if(p.kcal.indexOf('−15')>=0)return '≈'+money(c.tdee*0.85)+' kcal';
+    if(p.kcal.indexOf('−20%～−25%')>=0)return '≈'+money(c.tdee*0.775)+' kcal';
+    if(p.kcal.indexOf('−22')>=0)return '≈'+money(c.tdee*0.78)+' kcal';
+    if(p.kcal.indexOf('−20')>=0)return '≈'+money(c.tdee*0.80)+' kcal';
+    if(p.kcal.indexOf('−10')>=0)return '≈'+money(c.tdee*0.90)+' kcal';
     return p.kcal;
   }
-
   function renderPlan(){
-    var tb=$('planTable').querySelector('tbody'), c=calc();
-    var wt=parseFloat(S.wt)||null;
-    var curW=null;
-    if(S.start){
-      var st=new Date(S.start+'T00:00:00'), now=new Date();
-      var diff=Math.floor((now-st)/604800000);
-      if(diff>=0&&diff<12) curW=diff;
-    }
+    var tb=$('planTable').querySelector('tbody'),c=calc(),wt=parseFloat(S.wt)||null,curW=null;
+    if(S.start){var st=new Date(S.start+'T00:00:00');var diff=Math.floor((new Date()-st)/604800000);if(diff>=0&&diff<12)curW=diff;}
     tb.innerHTML=PLAN.map(function(p,i){
-      var isNow = curW!==null && curW>=p.k && (i===PLAN.length-1 || curW<PLAN[i+1].k);
-      var prot = wt? Math.round(wt*p.prot)+' g/天' : p.prot+' g/kg';
-      if(p.w==='第 8–10 周'&&wt) prot=Math.round(wt*1.6)+'–'+Math.round(wt*2.0)+' g/天';
-      return '<tr class="'+(isNow?'now':'')+'"><td>'+p.w+(isNow?' ●':'')+'</td><td class="num">'+dateOfWeek(p.k)+
-        '</td><td class="num">'+kcalText(p,c)+'</td><td>'+prot+'</td><td>'+p.train+'</td><td>'+p.task+'</td></tr>';
+      var isNow=curW!==null&&curW>=p.k&&(i===PLAN.length-1||curW<PLAN[i+1].k);
+      var prot=wt?Math.round(wt*p.p)+' g/天':p.p+' g/kg';
+      if(p.w==='第 8–10 周'&&wt)prot=Math.round(wt*1.6)+'–'+Math.round(wt*2.0)+' g/天';
+      return '<tr class="'+(isNow?'now':'')+'"><td>'+p.w+(isNow?' ●':'')+'</td><td class="num">'+dateOfWeek(p.k)+'</td><td class="num">'+
+        kcalText(p,c)+'</td><td>'+prot+'</td><td>'+p.train+'</td><td>'+p.task+'</td></tr>';
     }).join('');
-    $('planPills').innerHTML = c
-      ? '<span class="pill">方案 <b>'+c.label+'</b></span><span class="pill">蛋白 <b>'+c.protLo+'–'+c.protHi+' g/天</b></span><span class="pill">目标热量 <b>'+money(c.target)+' kcal</b></span>'+(c.weeks?'<span class="pill">预计 <b>'+c.weeks+' 周</b>达标</span>':'')
-      : '';
+    $('planPills').innerHTML=c?'<span class="pill">方案 <b>'+c.label+'</b></span><span class="pill">蛋白 <b>'+c.protLo+'–'+c.protHi+' g/天</b></span><span class="pill">目标热量 <b>'+money(c.target)+' kcal</b></span>'+(c.weeks?'<span class="pill">预计 <b>'+c.weeks+' 周</b>达标</span>':''):'';
   }
 
   function renderLogs(){
-    var tb=$('logTable').querySelector('tbody'), rows=S.logs;
+    var tb=$('logTable').querySelector('tbody'),rows=S.logs;
     tb.innerHTML=rows.map(function(r,i){
-      var cur=num(r.wt), prev=i>0?num(rows[i-1].wt):null, delta='—';
-      if(cur!==null&&prev!==null){
-        var d=cur-prev;
-        delta='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>';
-      }
+      var cur=num(r.wt),prev=i>0?num(rows[i-1].wt):null,delta='—';
+      if(cur!==null&&prev!==null){var d=cur-prev;delta='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>';}
       return '<tr><td style="color:var(--dim)">'+(r.w===0?'基线':'第'+r.w+'周')+'</td>'+
         '<td><input data-i="'+i+'" data-k="wt" type="number" step="0.1" inputmode="decimal" value="'+(r.wt==null?'':r.wt)+'" placeholder="kg"></td>'+
         '<td><input data-i="'+i+'" data-k="waist" type="number" step="0.1" inputmode="decimal" value="'+(r.waist==null?'':r.waist)+'" placeholder="cm"></td>'+
         '<td><input data-i="'+i+'" data-k="bf" type="number" step="0.1" inputmode="decimal" value="'+(r.bf==null?'':r.bf)+'" placeholder="%"></td>'+
-        '<td class="num">'+delta+'</td>'+
-        '<td><button class="del" data-del="'+i+'">×</button></td></tr>';
+        '<td class="num">'+delta+'</td><td><button class="del" data-del="'+i+'">×</button></td></tr>';
     }).join('');
-
     Array.prototype.forEach.call(tb.querySelectorAll('input'),function(inp){
       inp.addEventListener('input',function(e){
-        var i=+e.target.dataset.i, k=e.target.dataset.k;
-        S.logs[i][k]=e.target.value; save(); renderProgress(); drawChart();
-        var cell=e.target.closest('tr').children[4];
-        var cur=num(S.logs[i].wt), prev=i>0?num(S.logs[i-1].wt):null;
-        if(cur!==null&&prev!==null){ var d=cur-prev; cell.innerHTML='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>'; }
+        var i=+e.target.dataset.i,k=e.target.dataset.k;
+        S.logs[i][k]=e.target.value;save();renderProgress();drawChart();
+        var cell=e.target.closest('tr').children[4],cur=num(S.logs[i].wt),prev=i>0?num(S.logs[i-1].wt):null;
+        if(cur!==null&&prev!==null){var d=cur-prev;cell.innerHTML='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>';}
         else cell.textContent='—';
       });
     });
     Array.prototype.forEach.call(tb.querySelectorAll('[data-del]'),function(b){
-      b.addEventListener('click',function(){
-        S.logs.splice(+b.dataset.del,1); save(); renderLogs(); renderProgress(); drawChart();
-      });
+      b.onclick=function(){S.logs.splice(+b.dataset.del,1);save();renderLogs();renderProgress();drawChart();};
     });
     $('logHint').textContent=S.logs.filter(function(r){return num(r.wt)!==null;}).length+' 条有效记录';
   }
-
   function renderProgress(){
     var valid=S.logs.filter(function(r){return num(r.wt)!==null;});
     var startW=valid.length?num(valid[0].wt):(parseFloat(S.wt)||null);
@@ -343,94 +414,190 @@ footer{color:var(--dim);font-size:12px;text-align:center;padding:24px 14px 10px;
     $('pStart').textContent=startW?('起点 '+f1(startW)+' kg'):'起点 —';
     $('pNow').textContent=lastW?('最新 '+f1(lastW)+' kg'+(startW?('　Δ '+(lastW-startW>0?'+':'')+f1(lastW-startW)+' kg'):'')):'最新 —';
     var pct=0;
-    if(startW&&lastW&&goal&&startW>goal){ pct=Math.max(0,Math.min(100,(startW-lastW)/(startW-goal)*100)); }
+    if(startW&&lastW&&goal&&startW>goal)pct=Math.max(0,Math.min(100,(startW-lastW)/(startW-goal)*100));
     $('pbarFill').style.width=pct.toFixed(1)+'%';
   }
-
   function drawChart(){
-    var cv=$('chart'), dpr=window.devicePixelRatio||1, w=cv.clientWidth||300, h=170;
-    cv.width=w*dpr; cv.height=h*dpr;
-    var ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+    var cv=$('chart');if(!cv||!cv.clientWidth)return;
+    var dpr=window.devicePixelRatio||1,w=cv.clientWidth,h=170;
+    cv.width=w*dpr;cv.height=h*dpr;
+    var ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,w,h);
     var pts=S.logs.map(function(r,i){return {i:i,v:num(r.wt)};}).filter(function(p){return p.v!==null;});
     var goal=parseFloat(S.goal)||null;
-    if(pts.length<2){
-      ctx.fillStyle='#6b7c91'; ctx.font='13px system-ui'; ctx.textAlign='center';
-      ctx.fillText('记录两次以上体重后显示趋势线', w/2, h/2); return;
-    }
-    var vals=pts.map(function(p){return p.v;}); if(goal) vals.push(goal);
-    var min=Math.min.apply(null,vals), max=Math.max.apply(null,vals);
-    var pad=(max-min)*0.25||2; min-=pad; max+=pad;
-    function X(i){ return 22+(w-44)*(pts.length>1?i/(pts.length-1):0); }
-    function Y(v){ return h-26-(h-46)*((v-min)/(max-min)); }
-    if(goal){
-      ctx.strokeStyle='rgba(56,189,248,.5)'; ctx.setLineDash([5,5]); ctx.beginPath();
-      ctx.moveTo(22,Y(goal)); ctx.lineTo(w-22,Y(goal)); ctx.stroke(); ctx.setLineDash([]);
-      ctx.fillStyle='#38bdf8'; ctx.font='11px system-ui'; ctx.textAlign='left';
-      ctx.fillText('目标 '+f1(goal)+'kg', 22, Y(goal)-5);
-    }
-    ctx.strokeStyle='#4ade80'; ctx.lineWidth=2; ctx.beginPath();
-    pts.forEach(function(p,i){ var x=X(i),y=Y(p.v); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
-    ctx.stroke();
-    pts.forEach(function(p,i){ ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(X(i),Y(p.v),3.2,0,7); ctx.fill(); });
-    ctx.fillStyle='#95a6ba'; ctx.font='11px system-ui';
-    ctx.textAlign='left'; ctx.fillText(f1(pts[0].v), 22, h-8);
-    ctx.textAlign='right'; ctx.fillText(f1(pts[pts.length-1].v), w-22, h-8);
+    if(pts.length<2){ctx.fillStyle='#6b7c91';ctx.font='13px system-ui';ctx.textAlign='center';ctx.fillText('记录两次以上体重后显示趋势线',w/2,h/2);return;}
+    var vals=pts.map(function(p){return p.v;});if(goal)vals.push(goal);
+    var min=Math.min.apply(null,vals),max=Math.max.apply(null,vals),pad=(max-min)*0.25||2;
+    min-=pad;max+=pad;
+    function X(i){return 22+(w-44)*(pts.length>1?i/(pts.length-1):0);}
+    function Y(v){return h-26-(h-46)*((v-min)/(max-min));}
+    if(goal){ctx.strokeStyle='rgba(56,189,248,.5)';ctx.setLineDash([5,5]);ctx.beginPath();ctx.moveTo(22,Y(goal));ctx.lineTo(w-22,Y(goal));ctx.stroke();ctx.setLineDash([]);
+      ctx.fillStyle='#38bdf8';ctx.font='11px system-ui';ctx.textAlign='left';ctx.fillText('目标 '+f1(goal)+'kg',22,Y(goal)-5);}
+    ctx.strokeStyle='#4ade80';ctx.lineWidth=2;ctx.beginPath();
+    pts.forEach(function(p,i){var x=X(i),y=Y(p.v);i?ctx.lineTo(x,y):ctx.moveTo(x,y);});ctx.stroke();
+    pts.forEach(function(p,i){ctx.fillStyle='#4ade80';ctx.beginPath();ctx.arc(X(i),Y(p.v),3.2,0,7);ctx.fill();});
+    ctx.fillStyle='#95a6ba';ctx.font='11px system-ui';
+    ctx.textAlign='left';ctx.fillText(f1(pts[0].v),22,h-8);
+    ctx.textAlign='right';ctx.fillText(f1(pts[pts.length-1].v),w-22,h-8);
   }
 
-  function bindFields(){
-    [['sex','sex'],['age','age'],['ht','ht'],['wt','wt'],['goal','goal'],['act','act'],['path','path'],['start','start']].forEach(function(pair){
-      var el=$(pair[0]);
-      el.value=(S[pair[1]]==null?'':S[pair[1]]);
-      var handler=function(){ S[pair[1]]=el.value; save(); renderMetrics(); renderPlan(); renderProgress(); };
-      el.addEventListener('input',handler);
-      el.addEventListener('change',handler);
+  /* ---- 饮食 ---- */
+  function dayData(d,create){
+    if(!S.days[d]){if(!create)return null;var o={};MEALS.forEach(function(m){o[m.k]={t:'',k:'',p:''};});S.days[d]=o;}
+    var dd=S.days[d];MEALS.forEach(function(m){if(!dd[m.k])dd[m.k]={t:'',k:'',p:''};});
+    return dd;
+  }
+  function dayTotals(d){
+    var dd=S.days[d];if(!dd)return {kcal:0,prot:0,filled:0};
+    var kcal=0,prot=0,filled=0;
+    MEALS.forEach(function(m){var e=dd[m.k]||{};var k=num(e.k)||0,p=num(e.p)||0;kcal+=k;prot+=p;
+      if((e.t&&e.t.replace(/\s/g,''))||k||p)filled++;});
+    return {kcal:kcal,prot:prot,filled:filled};
+  }
+  function renderDay(){
+    $('day').value=S.day;
+    var dd=dayData(S.day,true),c=calc();
+    $('meals').innerHTML=MEALS.map(function(m){
+      var e=dd[m.k]||{t:'',k:'',p:''};
+      return '<div class="meal"><div class="mhead"><span class="tag">'+m.tag+'</span><span class="mname">'+m.name+'</span>'+
+        '<span class="mk" id="mk-'+m.k+'"></span></div>'+
+        '<input data-meal="'+m.k+'" data-f="t" type="text" value="'+(e.t||'').replace(/"/g,'&quot;')+'" placeholder="'+m.ph+'">'+
+        '<div class="mrow">'+
+        '<input data-meal="'+m.k+'" data-f="k" type="number" inputmode="numeric" value="'+(e.k||'')+'" placeholder="热量 kcal">'+
+        '<input data-meal="'+m.k+'" data-f="p" type="number" inputmode="decimal" value="'+(e.p||'')+'" placeholder="蛋白 g">'+
+        '<span></span></div></div>';
+    }).join('');
+    Array.prototype.forEach.call($('meals').querySelectorAll('input'),function(inp){
+      inp.addEventListener('input',function(e){
+        var mk=e.target.dataset.meal,f=e.target.dataset.f;
+        var dd2=dayData(S.day,true);dd2[mk][f]=e.target.value;
+        save();updateDayTotals();
+      });
+    });
+    updateDayTotals();
+  }
+  function updateDayTotals(){
+    var c=calc(),t=dayTotals(S.day),dd=S.days[S.day]||{};
+    var tgtKcal=c?c.target:null,tgtProt=c?c.protLo:null,tgtProtHi=c?c.protHi:null;
+    MEALS.forEach(function(m){
+      var e=dd[m.k]||{},k=num(e.k)||0,p=num(e.p)||0,el=$('mk-'+m.k);
+      if(el)el.textContent=(k?money(k)+' kcal':'')+(k&&p?' · ':'')+(p?p+' g 蛋白':'');
+    });
+    $('kcalVal').textContent=money(t.kcal)+' kcal';
+    $('kcalTarget').textContent=tgtKcal?('目标 '+money(tgtKcal)+' kcal'):'目标 —';
+    $('kcalBar').style.width=(tgtKcal?Math.min(100,t.kcal/tgtKcal*100):0).toFixed(1)+'%';
+    var kLeft=tgtKcal?Math.round(tgtKcal-t.kcal):null;
+    $('kcalLeft').textContent=tgtKcal?(kLeft>=0?('还可吃 '+money(kLeft)+' kcal'):('超出 '+money(-kLeft)+' kcal')):'—';
+    $('kcalPct').textContent=tgtKcal?(Math.round(t.kcal/tgtKcal*100)+'%'):'';
+    var kb=$('kcalBox');
+    kb.classList.toggle('warn',!!tgtKcal&&t.kcal>tgtKcal*0.9&&t.kcal<=tgtKcal);
+    kb.classList.toggle('over',!!tgtKcal&&t.kcal>tgtKcal);
+
+    $('protVal').textContent=Math.round(t.prot)+' g';
+    $('protTarget').textContent=tgtProt?('目标 '+tgtProt+'–'+tgtProtHi+' g'):'目标 —';
+    $('protBar').style.width=(tgtProt?Math.min(100,t.prot/tgtProt*100):0).toFixed(1)+'%';
+    $('protLeft').textContent=tgtProt?(t.prot>=tgtProt?'✅ 已达标':'还差 '+Math.round(tgtProt-t.prot)+' g'):'—';
+    $('protPct').textContent=tgtProt?(Math.round(t.prot/tgtProt*100)+'%'):'';
+    var pb=$('protBox');
+    pb.classList.toggle('warn',!!tgtProt&&t.prot>=tgtProt*0.85&&t.prot<tgtProt);
+
+    renderWeek7();
+  }
+  function renderWeek7(){
+    var rows=[],sumK=0,sumP=0,cnt=0,hit=0,c=calc(),tgtP=c?c.protLo:null;
+    for(var i=6;i>=0;i--){
+      var d=shiftDate(S.day,-i),t=dayTotals(d);
+      if(t.filled){cnt++;sumK+=t.kcal;sumP+=t.prot;}
+      var hitThis=!!(tgtP&&t.prot>=tgtP);
+      if(t.filled&&hitThis)hit++;
+      rows.push('<tr><td>'+fmtDate(d)+((d===todayStr())?'（今天）':'')+'</td><td class="num">'+(t.filled?money(t.kcal)+' kcal':'—')+
+        '</td><td class="num">'+(t.filled?Math.round(t.prot)+' g':'—')+'</td><td>'+
+        (t.filled?(hitThis?'<span style="color:var(--green)">✅ 达标</span>':'<span style="color:var(--amber)">⚠ 不足</span>'):'未记录')+'</td></tr>');
+    }
+    $('week7Table').querySelector('tbody').innerHTML=rows.join('');
+    $('week7Pills').innerHTML='<span class="pill">记录 <b>'+cnt+'/7</b> 天</span>'+
+      (cnt?'<span class="pill">日均热量 <b>'+money(sumK/cnt)+' kcal</b></span><span class="pill">日均蛋白 <b>'+Math.round(sumP/cnt)+' g</b></span>':'')+
+      (cnt?'<span class="pill">蛋白达标 <b>'+hit+'/'+cnt+'</b> 天</span>':'');
+  }
+
+  var QUICK=[
+    {n:'鸡蛋(1个)',k:75,p:6.5},{n:'鸡胸100g',k:165,p:31},{n:'米饭150g',k:174,p:3.9},
+    {n:'燕麦50g',k:190,p:6.5},{n:'牛奶250ml',k:155,p:8},{n:'希腊酸奶150g',k:145,p:15},
+    {n:'乳清蛋白1勺',k:120,p:24},{n:'香蕉(中)',k:105,p:1.3},{n:'红薯200g',k:172,p:3.2},
+    {n:'坚果20g',k:130,p:3.5},{n:'鱼150g',k:200,p:30},{n:'豆腐150g',k:120,p:12}
+  ];
+  function renderChips(){
+    $('quickChips').innerHTML=QUICK.map(function(q,i){
+      return '<span class="chip" data-q="'+i+'">'+q.n+' · '+q.k+'kcal/'+q.p+'g</span>';}).join('');
+    Array.prototype.forEach.call($('quickChips').querySelectorAll('[data-q]'),function(el){
+      el.onclick=function(){
+        var q=QUICK[+el.dataset.q],dd=dayData(S.day,true);
+        var order=['l','d','b','s1','s2','x'];
+        var target=order.filter(function(k){return !num(dd[k].k);})[0]||'l';
+        var e=dd[target];
+        e.t=(e.t?e.t+' + ':'')+q.n;
+        e.k=String((num(e.k)||0)+q.k);
+        e.p=String(((num(e.p)||0)+q.p).toFixed(1));
+        save();renderDay();
+      };
     });
   }
 
-  $('addRow').addEventListener('click',function(){
-    var w=S.logs.length?((S.logs[S.logs.length-1].w||0)+1):0;
-    S.logs.push({w:w,wt:'',waist:'',bf:''}); save(); renderLogs(); renderProgress(); drawChart();
-  });
-  $('fillWeeks').addEventListener('click',function(){
-    var have={}; S.logs.forEach(function(r){have[r.w]=1;});
-    for(var i=0;i<=12;i++){ if(!have[i]) S.logs.push({w:i,wt:'',waist:'',bf:''}); }
-    S.logs.sort(function(a,b){return a.w-b.w;});
-    save(); renderLogs(); renderProgress(); drawChart();
-  });
-  $('printBtn').addEventListener('click',function(){ window.print(); });
-  $('clearBtn').addEventListener('click',function(){
+  function bindFields(){
+    [['sex','sex'],['age','age'],['ht','ht'],['wt','wt'],['goal','goal'],['act','act'],['path','path'],['start','start']].forEach(function(p){
+      var el=$(p[0]);el.value=(S[p[1]]==null?'':S[p[1]]);
+      var h=function(){S[p[1]]=el.value;save();renderMetrics();renderPlan();renderProgress();updateDayTotals();};
+      el.addEventListener('input',h);el.addEventListener('change',h);
+    });
+  }
+
+  $('addRow').onclick=function(){var w=S.logs.length?((S.logs[S.logs.length-1].w||0)+1):0;S.logs.push({w:w,wt:'',waist:'',bf:''});save();renderLogs();renderProgress();drawChart();};
+  $('fillWeeks').onclick=function(){var have={};S.logs.forEach(function(r){have[r.w]=1;});for(var i=0;i<=12;i++)if(!have[i])S.logs.push({w:i,wt:'',waist:'',bf:''});S.logs.sort(function(a,b){return a.w-b.w;});save();renderLogs();renderProgress();drawChart();};
+  $('printBtn').onclick=function(){window.print();};
+  $('clearBtn').onclick=function(){
     if(confirm('清空所有本机数据？不可撤销，建议先导出备份。')){
       localStorage.removeItem(KEY);
-      S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:new Date().toISOString().slice(0,10),logs:[{w:0,wt:'',waist:'',bf:''}]};
-      save(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+      S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:todayStr(),
+         logs:[{w:0,wt:'',waist:'',bf:''}],days:{},tab:'plan',day:todayStr()};
+      save();bindFields();renderLogs();renderMetrics();renderPlan();renderProgress();drawChart();renderDay();renderTabs();
     }
-  });
-  $('exportBtn').addEventListener('click',function(){
+  };
+  $('exportBtn').onclick=function(){
     var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
-    var a=document.createElement('a');
-    a.href=URL.createObjectURL(blob);
-    a.download='减重计划备份-'+new Date().toISOString().slice(0,10)+'.json';
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function(){ URL.revokeObjectURL(a.href); },1500);
-  });
-  $('importBtn').addEventListener('click',function(){ $('importFile').click(); });
-  $('importFile').addEventListener('change',function(e){
-    var f=e.target.files[0]; if(!f) return;
-    var fr=new FileReader();
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='减重计划备份-'+todayStr()+'.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(a.href);},1500);
+  };
+  $('importBtn').onclick=function(){$('importFile').click();};
+  $('importFile').onchange=function(e){
+    var f=e.target.files[0];if(!f)return;var fr=new FileReader();
     fr.onload=function(){
       try{
         var d=JSON.parse(fr.result);
-        for(var k in d){ if(d.hasOwnProperty(k)) S[k]=d[k]; }
-        if(!Array.isArray(S.logs)||!S.logs.length){ S.logs=[{w:0,wt:'',waist:'',bf:''}]; }
-        save(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+        for(var k in d){if(d.hasOwnProperty(k))S[k]=d[k];}
+        if(!Array.isArray(S.logs)||!S.logs.length)S.logs=[{w:0,wt:'',waist:'',bf:''}];
+        if(!S.days||typeof S.days!=='object')S.days={};
+        if(!S.day)S.day=todayStr();
+        save();bindFields();renderLogs();renderMetrics();renderPlan();renderProgress();drawChart();renderDay();renderTabs();
         alert('备份已导入');
-      }catch(err){ alert('文件格式不对'); }
+      }catch(err){alert('文件格式不对');}
     };
     fr.readAsText(f);
-  });
-  window.addEventListener('resize',drawChart);
+  };
 
-  load(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+  $('day').onchange=function(){S.day=$('day').value||todayStr();save();renderDay();};
+  $('prevDay').onclick=function(){S.day=shiftDate(S.day,-1);save();renderDay();};
+  $('nextDay').onclick=function(){S.day=shiftDate(S.day,1);save();renderDay();};
+  $('todayBtn').onclick=function(){S.day=todayStr();save();renderDay();};
+  $('copyPrev').onclick=function(){
+    var prev=shiftDate(S.day,-1),src=S.days[prev];
+    if(!src){alert('前一天没有记录');return;}
+    S.days[S.day]=JSON.parse(JSON.stringify(src));save();renderDay();
+  };
+  window.addEventListener('resize',function(){if(S.tab==='log')drawChart();});
+
+  load();bindFields();renderTabs();renderMetrics();renderPlan();renderLogs();renderProgress();renderDay();renderChips();
+  setTimeout(drawChart,60);
 })();
 </script>
 </body>
