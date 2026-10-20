@@ -2,648 +2,436 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ISSN 2026 减重饮食立场声明 · 中文精读与 12 周计划</title>
-<meta name="description" content="国际运动营养学会（ISSN）2026 年 10 月 13 日发布的《减重饮食立场声明》中文精读：15 条官方立场、218 篇文献证据、饮食法对比与 12 周减重计划表。">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>减肥计划表 · 本地保存 · 基于 ISSN 2026 减重立场声明</title>
+<meta name="description" content="填自己的信息，自动生成 12 周减重计划表 + 每周记录表，数据只存在你本机浏览器（localStorage），不上传服务器。依据 ISSN 2026 减重饮食立场声明设计。">
+<meta name="theme-color" content="#0d1117">
 <style>
 :root{
-  --bg:#0d1117; --bg-soft:#131a23; --card:#18212c; --card-2:#1e2936;
-  --line:#2a3746; --text:#e6edf3; --muted:#93a4b8; --dim:#6b7c91;
-  --accent:#4ade80; --accent-2:#38bdf8; --warn:#fbbf24; --bad:#f87171;
-  --radius:14px; --maxw:1080px;
+  --bg:#0d1117; --card:#161d26; --card2:#1d2734; --line:#2a3746;
+  --text:#e8eef5; --muted:#95a6ba; --dim:#6b7c91;
+  --green:#4ade80; --blue:#38bdf8; --amber:#fbbf24; --red:#f87171;
+  --r:14px;
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{-webkit-text-size-adjust:100%}
 body{
-  margin:0; background:var(--bg); color:var(--text);
-  font:16px/1.75 -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-  -webkit-font-smoothing:antialiased;
+  margin:0;background:var(--bg);color:var(--text);
+  font:15px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+  padding-bottom:40px;
 }
-a{color:var(--accent-2);text-decoration:none}
-a:hover{text-decoration:underline}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 20px}
-header.nav{
-  position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);
-  background:rgba(13,17,23,.86);border-bottom:1px solid var(--line);
+a{color:var(--blue);text-decoration:none}
+.wrap{max-width:900px;margin:0 auto;padding:0 14px}
+.topbar{position:sticky;top:0;z-index:40;background:rgba(13,17,23,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);}
+.topbar .inner{max-width:900px;margin:0 auto;padding:10px 14px;display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.brand{font-weight:800;font-size:15px;letter-spacing:.2px;white-space:nowrap}
+.brand span{color:var(--green)}
+.top-links{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line);background:var(--card2);color:var(--text);border-radius:10px;padding:8px 12px;font-size:13.5px;font-weight:600;cursor:pointer;white-space:nowrap;}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--green);border-color:var(--green);color:#06240f}
+.btn.ghost{background:transparent}
+.btn.sm{padding:6px 10px;font-size:12.5px}
+.btn.danger{color:var(--red);border-color:rgba(248,113,113,.4)}
+h1{font-size:21px;margin:20px 0 6px;letter-spacing:.2px}
+.sub{color:var(--muted);font-size:13.5px;margin:0 0 16px}
+section{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px;margin:14px 0}
+.sec-head{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.sec-head .n{width:22px;height:22px;border-radius:7px;background:rgba(74,222,128,.15);color:var(--green);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.sec-head .t{font-weight:800;font-size:15.5px}
+.sec-head .hint{margin-left:auto;font-size:12px;color:var(--dim)}
+label{display:block;font-size:12.5px;color:var(--dim);margin-bottom:4px}
+input,select{width:100%;background:#0b1119;border:1px solid var(--line);color:var(--text);border-radius:10px;padding:11px 12px;font-size:16px;font-family:inherit;}
+input:focus,select:focus{outline:none;border-color:var(--blue)}
+input[type=date]{min-height:44px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:12px}
+.metric{background:#0b1119;border:1px solid var(--line);border-radius:12px;padding:12px}
+.metric .big{font-size:19px;font-weight:800;color:var(--green);line-height:1.25}
+.metric .lbl{font-size:11.5px;color:var(--dim);margin-top:3px;line-height:1.35}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--line);border-radius:12px}
+th,td{padding:9px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+th{background:var(--card2);font-size:12px;color:#cfe0f0;white-space:nowrap}
+tr:last-child td{border-bottom:none}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+.plan-tbl td:first-child{font-weight:700;white-space:nowrap}
+.plan-tbl tr.now{background:rgba(74,222,128,.08)}
+.plan-tbl tr.now td:first-child{color:var(--green)}
+.log-tbl input{padding:7px 8px;font-size:16px;border-radius:8px;min-width:64px}
+.log-tbl td{padding:6px}
+.log-tbl .del{background:transparent;border:none;color:var(--red);font-size:17px;cursor:pointer;padding:0 4px}
+.pbar{height:9px;background:#0b1119;border:1px solid var(--line);border-radius:99px;overflow:hidden;margin-top:10px}
+.pbar>i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--blue));width:0;transition:width .4s}
+.pinfo{display:flex;justify-content:space-between;font-size:12px;color:var(--dim);margin-top:6px}
+canvas{width:100%;height:170px;display:block;margin-top:10px}
+.tip{background:rgba(56,189,248,.08);border:1px solid rgba(56,189,248,.3);border-radius:12px;padding:11px 13px;font-size:13px;color:#cbe7f7;margin-top:12px}
+.tip.warn{background:rgba(251,191,36,.08);border-color:rgba(251,191,36,.3);color:#f5e2b0}
+.tip b{color:#fff}
+.pills{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pill{background:var(--card2);border:1px solid var(--line);border-radius:99px;padding:6px 11px;font-size:12.5px;color:var(--muted)}
+.pill b{color:var(--green)}
+footer{color:var(--dim);font-size:12px;text-align:center;padding:24px 14px 10px;line-height:1.8}
+.badge{display:inline-block;border:1px solid var(--line);border-radius:6px;padding:2px 7px;font-size:11px}
+.empty{color:var(--dim);font-size:13px;text-align:center;padding:16px}
+@media (max-width:420px){
+  h1{font-size:19px}
+  section{padding:13px}
+  .metric .big{font-size:17px}
 }
-header.nav .wrap{display:flex;align-items:center;gap:18px;height:56px}
-header.nav .brand{font-weight:700;letter-spacing:.2px}
-header.nav nav{display:flex;gap:16px;flex-wrap:wrap;font-size:14px}
-header.nav nav a{color:var(--muted)}
-header.nav nav a:hover{color:var(--text)}
-.hero{padding:54px 0 34px;border-bottom:1px solid var(--line);background:
-  radial-gradient(900px 320px at 12% -10%, rgba(74,222,128,.12), transparent 60%),
-  radial-gradient(700px 300px at 88% 0%, rgba(56,189,248,.10), transparent 60%);}
-.tag{display:inline-block;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);
-  border:1px solid rgba(74,222,128,.35);background:rgba(74,222,128,.08);padding:4px 10px;border-radius:999px}
-h1{font-size:clamp(24px,3.4vw,38px);line-height:1.32;margin:16px 0 10px}
-.sub{color:var(--muted);font-size:17px;max-width:820px}
-.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:26px}
-.meta-item{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
-.meta-item .k{font-size:12px;color:var(--dim);letter-spacing:.06em}
-.meta-item .v{font-size:14px;margin-top:3px;word-break:break-all}
-.chips{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.chip{background:var(--card-2);border:1px solid var(--line);border-radius:999px;padding:7px 14px;font-size:13px;color:var(--muted)}
-.chip b{color:var(--accent)}
-section{padding:46px 0;border-bottom:1px solid var(--line)}
-h2{font-size:clamp(20px,2.4vw,27px);margin:0 0 8px;display:flex;align-items:center;gap:10px}
-h2 .num{font-size:13px;color:var(--accent);border:1px solid rgba(74,222,128,.3);border-radius:8px;padding:2px 8px}
-.lead{color:var(--muted);margin:0 0 22px;max-width:860px}
-h3{font-size:17px;margin:26px 0 8px;color:#fff}
-h4{font-size:15px;margin:18px 0 6px;color:var(--accent-2)}
-p{margin:10px 0}
-ul,ol{margin:10px 0 10px 22px;padding:0}
-li{margin:6px 0}
-strong{color:#fff}
-.small{font-size:13.5px;color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px}
-.grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
-.points{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin-top:18px}
-.point{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:16px 18px}
-.point .idx{font-size:12px;color:var(--accent);font-weight:700;letter-spacing:.08em}
-.point .t{font-weight:700;margin:6px 0 6px;font-size:15.5px}
-.point .d{font-size:14.5px;color:var(--muted)}
-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
-.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-table th,table td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-table th{background:var(--card-2);font-size:13px;letter-spacing:.03em;color:#cfe0f0;white-space:nowrap}
-table tr:last-child td{border-bottom:none}
-table td:first-child{white-space:normal;font-weight:600;color:#fff}
-tbody tr:hover{background:rgba(56,189,248,.04)}
-.callout{border:1px solid rgba(251,191,36,.35);background:rgba(251,191,36,.07);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:14.5px}
-.callout.green{border-color:rgba(74,222,128,.35);background:rgba(74,222,128,.07)}
-.callout.red{border-color:rgba(248,113,113,.35);background:rgba(248,113,113,.07)}
-.callout .h{font-weight:700;color:#fff;margin-bottom:4px}
-.kv{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin:18px 0}
-.kv .box{background:var(--bg-soft);border:1px solid var(--line);border-radius:10px;padding:14px}
-.kv .box .big{font-size:22px;font-weight:800;color:var(--accent)}
-.kv .box .lbl{font-size:12.5px;color:var(--dim);margin-top:4px}
-/* 计算器 */
-.calc{background:linear-gradient(180deg,var(--card-2),var(--card));border:1px solid var(--line);border-radius:var(--radius);padding:22px}
-.calc .row{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-bottom:14px}
-label{display:block;font-size:12.5px;color:var(--dim);margin-bottom:5px}
-input,select{width:100%;background:#0b1119;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px 12px;font-size:15px}
-input:focus,select:focus{outline:none;border-color:var(--accent-2)}
-.btn{background:var(--accent);color:#06240f;border:none;border-radius:9px;padding:11px 18px;font-weight:700;font-size:15px;cursor:pointer}
-.btn:hover{filter:brightness(1.06)}
-.result{display:none;margin-top:18px;border-top:1px dashed var(--line);padding-top:16px}
-.result.on{display:block}
-.res-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
-.res{background:#0b1119;border:1px solid var(--line);border-radius:10px;padding:13px}
-.res .big{font-size:20px;font-weight:800;color:var(--accent-2)}
-.res .lbl{font-size:12px;color:var(--dim)}
-.plan-week th{position:sticky;top:56px}
-.dl{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.dl a{display:inline-flex;align-items:center;gap:8px;background:var(--card-2);border:1px solid var(--line);border-radius:10px;padding:11px 16px;color:var(--text);font-size:14px}
-.dl a:hover{border-color:var(--accent);text-decoration:none}
-footer{padding:34px 0 60px;color:var(--dim);font-size:13.5px}
-footer .wrap{display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
-.badge{font-size:11.5px;color:var(--dim);border:1px solid var(--line);border-radius:6px;padding:2px 7px}
-mark{background:rgba(74,222,128,.2);color:#d7ffe6;padding:0 3px;border-radius:3px}
-.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-top:18px}
-.toc a{display:block;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:12px 14px;color:var(--text);font-size:14px}
-.toc a span{color:var(--dim);font-size:12px;display:block;margin-top:2px}
-@media(max-width:640px){
-  header.nav nav{display:none}
-  section{padding:34px 0}
-  table{font-size:13px}
-  table th,table td{padding:9px 10px}
+@media print{
+  .topbar,.btn,footer .no-print{display:none}
+  body{background:#fff;color:#000}
+  section{border-color:#ccc;background:#fff}
+  th{background:#eee;color:#000}
+  td,th{border-color:#ddd}
+  input{border:none;background:#fff;color:#000}
 }
 </style>
 </head>
 <body>
 
-<header class="nav">
-  <div class="wrap">
-    <div class="brand">减重科学 · 文献精读</div>
-    <nav>
-      <a href="#tldr">核心结论</a>
-      <a href="#points">15 条立场</a>
-      <a href="#energy">能量缺口</a>
-      <a href="#if">间歇禁食</a>
-      <a href="#macro">宏量营养素</a>
-      <a href="#adapt">减重适应</a>
-      <a href="#plateau">平台期</a>
-      <a href="#plan">12 周计划</a>
-      <a href="#calc">热量计算</a>
-      <a href="#ref">原文</a>
-    </nav>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="wrap">
-    <span class="tag">ISSN Position Stand · 2026</span>
-    <h1>减重饮食的循证全貌：<br>国际运动营养学会 2026 立场声明中文精读</h1>
-    <p class="sub">International Society of Sports Nutrition position stand: <em>diets for body weight reduction</em>。基于 200 余篇文献，给出 15 条官方立场，把「哪种减肥法最有效」这个问题拆成了能量缺口、进食节奏、宏量营养素三条可操作的轴线。</p>
-
-    <div class="meta-grid">
-      <div class="meta-item"><div class="k">发表期刊</div><div class="v">J Int Soc Sports Nutr, 23(1), 2026</div></div>
-      <div class="meta-item"><div class="k">在线发表日期</div><div class="v">2026 年 10 月 13 日</div></div>
-      <div class="meta-item"><div class="k">DOI / PMID</div><div class="v">10.1080/15502783.2026.2740266<br>PMID 42867412 · PMC13665703</div></div>
-      <div class="meta-item"><div class="k">作者</div><div class="v">Aragon AA 等 13 人（ISSN 研究委员会）</div></div>
-      <div class="meta-item"><div class="k">证据规模</div><div class="v">218 篇参考文献 · 2 张汇总表 · 6 张机制图</div></div>
-      <div class="meta-item"><div class="k">授权</div><div class="v">Open Access / CC BY（开放获取）</div></div>
-    </div>
-
-    <div class="chips">
-      <div class="chip">蛋白质 <b>1.2–1.6 g/kg</b>（一般人群）</div>
-      <div class="chip">减脂期保肌 <b>1.6–2.2 g/kg</b></div>
-      <div class="chip">瘦+训练者可到 <b>1.9–3.2 g/kg</b></div>
-      <div class="chip">VLED <b>&lt;800 kcal</b> 仅限临床</div>
-      <div class="chip">间歇禁食 <b>不比每日限能量更优</b></div>
-    </div>
-
-    <div class="toc">
-      <a href="#tldr">① 30 秒核心结论<span>这份声明到底说了什么</span></a>
-      <a href="#points">② 15 条官方立场<span>逐条中文解读</span></a>
-      <a href="#energy">③ 能量缺口的大小<span>VLED / LED / PSMF 的真实收益与代价</span></a>
-      <a href="#if">④ 持续 vs 间歇<span>隔日禁食、5:2、限时进食的证据</span></a>
-      <a href="#macro">⑤ 宏量营养素<span>蛋白优先，碳脂比例可自定义</span></a>
-      <a href="#adapt">⑥ 减重的生理适应<span>为什么越减越难</span></a>
-      <a href="#plateau">⑦ 平台期<span>不是失败，是信号</span></a>
-      <a href="#tables">⑧ 三张实用对照表<span>饮食法 / 蛋白 / 体脂</span></a>
-      <a href="#plan">⑨ 12 周减重计划表<span>基于本声明的落地方案</span></a>
-      <a href="#calc">⑩ 个人热量与蛋白计算器<span>输入体重即可</span></a>
+<div class="topbar">
+  <div class="inner">
+    <div class="brand">减重<span>计划表</span></div>
+    <div class="top-links">
+      <a class="btn primary" href="https://github.com/acloudpeng/issn-2026-weight-loss/raw/master/data/ISSN-2026-position-stand-diets-for-weight-reduction.pdf" target="_blank" rel="noopener">📄 下载论文 PDF</a>
+      <a class="btn ghost" href="/read.html">📖 中文精读</a>
     </div>
   </div>
 </div>
 
-<section id="tldr">
-  <div class="wrap">
-    <h2><span class="num">01</span> 30 秒核心结论</h2>
-    <p class="lead">这份声明的价值不在于告诉你「吃生酮还是低脂」，而在于它把大量随机对照试验汇总后，给出了一个相当反直觉的答案：<strong>对绝大多数人，减肥法的选择远不如三件事重要——总能量缺口、蛋白质摄入量、抗阻训练。</strong></p>
+<div class="wrap">
 
-    <div class="callout green">
-      <div class="h">一句话</div>
-      决定减重质量的是「缺口 + 蛋白 + 举铁」，而不是「你选了哪种流行饮食法」。任何让你掉秤的方案，如果没有足够蛋白和抗阻训练，掉的体重里会混进大量瘦体重（肌肉、骨骼、水分）。
-    </div>
+<h1>你的 12 周减重计划表</h1>
+<p class="sub">填写自己的信息 → 自动生成计划与记录表。数据<b>只保存在你本机浏览器</b>（localStorage），不上传任何服务器。</p>
 
-    <div class="kv">
-      <div class="box"><div class="big">10–15%</div><div class="lbl">VLED/LED 典型减重幅度（10–16 kg）</div></div>
-      <div class="box"><div class="big">0.94 kg</div><div class="lbl">6 个月时禁食策略比每日限能量多减的体重（无临床意义）</div></div>
-      <div class="box"><div class="big">2 kg</div><div class="lbl">间歇禁食 12 周平均多掉的瘦体重（抗阻训练可缓解）</div></div>
-      <div class="box"><div class="big">8–12 周</div><div class="lbl">绝大多数饮食法开始进入平台期的时间</div></div>
-    </div>
-
-    <h3>它明确不覆盖的三件事</h3>
-    <p class="small">脱水式减重（赛前称重）、GLP-1 类药物（司美格鲁肽/替尔泊肽）、减重手术。也就是说：这份声明的结论适用于<strong>靠饮食和训练管理体重的健康人群与运动人群</strong>，不适用于把药物或手术当主路径的场景。</p>
+<section>
+  <div class="sec-head"><div class="n">1</div><div class="t">填你的信息</div><div class="hint">改完自动保存</div></div>
+  <div class="grid">
+    <div><label>性别</label>
+      <select id="sex"><option value="m">男</option><option value="f">女</option></select></div>
+    <div><label>年龄</label><input id="age" type="number" inputmode="numeric" min="14" max="90" placeholder="30"></div>
+    <div><label>身高（cm）</label><input id="ht" type="number" inputmode="decimal" min="120" max="220" placeholder="175"></div>
+    <div><label>当前体重（kg）</label><input id="wt" type="number" inputmode="decimal" step="0.1" min="30" max="250" placeholder="75"></div>
+    <div><label>目标体重（kg）</label><input id="goal" type="number" inputmode="decimal" step="0.1" min="30" max="250" placeholder="68"></div>
+    <div><label>活动水平</label>
+      <select id="act">
+        <option value="1.2">久坐（几乎不运动）</option>
+        <option value="1.375" selected>轻度（每周 1–3 次）</option>
+        <option value="1.55">中度（每周 3–5 次）</option>
+        <option value="1.725">高度（每周 6–7 次）</option>
+      </select></div>
+    <div><label>方案路径</label>
+      <select id="path">
+        <option value="A" selected>A 稳妥型（缺口 20–25%）</option>
+        <option value="B">B 运动型（缺口 15%，高蛋白）</option>
+        <option value="C">C 激进型（LED，需医生监督）</option>
+      </select></div>
+    <div><label>开始日期</label><input id="start" type="date"></div>
   </div>
+  <div class="cards" id="metrics"></div>
+  <div class="tip" id="targetTip" style="display:none"></div>
 </section>
 
-<section id="points">
-  <div class="wrap">
-    <h2><span class="num">02</span> 15 条官方立场（中文逐条）</h2>
-    <p class="lead">以下 15 条是 ISSN 研究委员会正式通过的立场原文要点，按官方编号排列，每条后附白话解释。</p>
-
-    <div class="points">
-      <div class="point"><div class="idx">POSITION 01</div><div class="t">减重饮食可以从三个维度分类</div><div class="d">能量缺口的大小、缺口的线性程度（持续还是间歇）、宏量营养素构成。这三项必须按个人偏好、耐受度和目标来调，没有普适最优。</div></div>
-
-      <div class="point"><div class="idx">POSITION 02</div><div class="t">激进限能量：短期更快，长期没优势</div><div class="d">极低能量饮食（&lt;800 kcal/天）与低能量饮食（800–1200 kcal/天）短期掉秤更多，但相比温和限能量<strong>没有长期优势</strong>；这类方案可能多掉瘦体重，靠足量蛋白与抗阻训练可以缓解；需警惕维生素、矿物质、纤维等营养素不足。</div></div>
-
-      <div class="point"><div class="idx">POSITION 03</div><div class="t">间歇禁食与每日限能量，结果没有差别</div><div class="d">隔日禁食、限时进食、每周两次断食，与持续限能量在体重与围度指标上<strong>没有差异</strong>。但宏量营养素质量会独立影响体成分与代谢健康。</div></div>
-
-      <div class="point"><div class="idx">POSITION 04</div><div class="t">一天吃几餐，不关键</div><div class="d">日内进食频次对体重与体脂下降影响很小，可以按个人习惯灵活安排，没有普适的上下限。但运动人群把蛋白分散到<strong>每天 ≥3 餐</strong>，有助于在持续热量缺口下保住瘦体重与运动表现。</div></div>
-
-      <div class="point"><div class="idx">POSITION 05</div><div class="t">抗阻训练 + 足量蛋白，是保瘦体重的必需品</div><div class="d">无论选哪种饮食法，这两项都不可替代。每日总蛋白最重要，如何分配是次要问题。</div></div>
-
-      <div class="point"><div class="idx">POSITION 06</div><div class="t">一般人群：1.2–1.6 g/kg 蛋白</div><div class="d">这个区间足以支持减重减脂、日常身体活动，并对肌肉骨骼与心血管代谢健康带来益处。它明显高于长期沿用的 0.8 g/kg RDA。</div></div>
-
-      <div class="point"><div class="idx">POSITION 07</div><div class="t">减脂期保肌：1.6–2.2 g/kg，瘦的人更高</div><div class="d">配合抗阻训练，1.6–2.2 g/kg 体重可优化肌肉合成；本身精瘦、有抗阻训练基础的人在热量缺口下，可提高到 <strong>1.9–3.2 g/kg</strong> 以最大化瘦体重保留。</div></div>
-
-      <div class="point"><div class="idx">POSITION 08</div><div class="t">碳水与脂肪的比例，随你</div><div class="d">为了减重这个目标，从生酮到低脂这一整段区间，表现相似。选你能长期坚持的那种。</div></div>
-
-      <div class="point"><div class="idx">POSITION 09</div><div class="t">生酮有效，但瘦体重掉得更多</div><div class="d">生酮饮食对减重减脂确实有效（抑制食欲、增加脂肪氧化），但相比高碳水对照组，瘦体重下降更多——尤其在较短试验中，糖原与总体水的变化会放大这一差异。</div></div>
-
-      <div class="point"><div class="idx">POSITION 10</div><div class="t">减重后的适应是必然的，方向是一致的</div><div class="d">身体会从物理、生理、行为三个层面适应，共同的终点是<strong>降低能量消耗</strong>，以对抗热量缺口带来的稳态扰动。</div></div>
-
-      <div class="point"><div class="idx">POSITION 11</div><div class="t">适应性产热：会发生，但不是必然</div><div class="d">适应性产热指静息能量消耗的下降超出「体成分变化所能解释」的部分。它可以在热量缺口与减重后出现，但并非不可避免，且<strong>在体重稳定后会显著减弱</strong>。</div></div>
-
-      <div class="point"><div class="idx">POSITION 12</div><div class="t">代谢适应可以被策略削弱</div><div class="d">能量消耗下降、肠道菌群多样性变差这些适应，常能通过有针对性的饮食与运动安排缓解——促进营养吸收与分配、维持代谢灵活性。</div></div>
-
-      <div class="point"><div class="idx">POSITION 13</div><div class="t">平台期是信号，不只是障碍</div><div class="d">有多种手段可以突破平台，但平台期本身也是一个提示：把已经取得的成果<strong>守住</strong>。最终目标是「维持在平台」，而不是永远往下掉。</div></div>
-
-      <div class="point"><div class="idx">POSITION 14</div><div class="t">需要跨专业团队与社会支持</div><div class="d">成功的体重管理建议由多学科健康专业团队指导，同时保持社会支持。</div></div>
-
-      <div class="point"><div class="idx">POSITION 15</div><div class="t">会自己做饭的人更容易成功</div><div class="d">学会做家常菜、提前规划一天的餐食，等于把营养的主动权拿回自己手里，也更容易管住体重与体成分。</div></div>
-    </div>
+<section>
+  <div class="sec-head"><div class="n">2</div><div class="t">12 周计划</div><div class="hint">按你的信息生成</div></div>
+  <div class="tw">
+    <table class="plan-tbl" id="planTable">
+      <thead><tr><th>周次</th><th>日期</th><th>热量</th><th>蛋白</th><th>训练</th><th>本周任务</th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
+  <div class="pills" id="planPills"></div>
 </section>
 
-<section id="energy">
-  <div class="wrap">
-    <h2><span class="num">03</span> 能量缺口的大小：更快 ≠ 更好</h2>
-    <p class="lead">声明的第一个轴是「缺口开多大」。这里的关键概念是<strong>减重质量</strong>：掉的体重里有多少是脂肪，有多少是瘦体重。</p>
+<section>
+  <div class="sec-head"><div class="n">3</div><div class="t">每周记录</div><div class="hint" id="logHint"></div></div>
+  <div class="pbar"><i id="pbarFill"></i></div>
+  <div class="pinfo"><span id="pStart">起点 —</span><span id="pNow">最新 —</span></div>
 
-    <h3>三档缺口的定义</h3>
-    <ul>
-      <li><strong>极低能量饮食（VLED）</strong>：全代餐配方，<mark>&lt;800 kcal/天</mark>，最低可到约 400 kcal，持续 <mark>8–16 周</mark>，之后逐步恢复真实食物；蛋白含量通常 0.8–1.5 g/kg。</li>
-      <li><strong>低能量饮食（LED）</strong>：<mark>800–1200 kcal/天</mark>，常用部分或全部代餐。</li>
-      <li><strong>蛋白质保留改良禁食（PSMF）</strong>：VLED 的高蛋白变体，蛋白 <mark>1.5–2.0 g/kg</mark>（有文献高至 3.0 g/kg），目的是在极端限能量下保住瘦组织。</li>
-    </ul>
-    <p class="small">注：800 kcal 这条线在文献里并不统一——有的把 800 归为 VLED，有的把 VLED 定义为低于 800。</p>
-
-    <h3>实测数字（声明汇总的试验结果）</h3>
-    <div class="kv">
-      <div class="box"><div class="big">1.5–2.5 kg/周</div><div class="lbl">VLED 的减重速度</div></div>
-      <div class="box"><div class="big">12.4–27.2 kg</div><div class="lbl">VLED 全代餐阶段（1–4 个月）的体重下降</div></div>
-      <div class="box"><div class="big">6.9–7.9 kg</div><div class="lbl">LED 同类阶段的体重下降</div></div>
-      <div class="box"><div class="big">10–15%</div><div class="lbl">两者合并的典型幅度（10–16 kg）</div></div>
-    </div>
-
-    <h3>代价与风险</h3>
-    <ul>
-      <li><strong>瘦体重与骨量流失</strong>：不配合足量蛋白与抗阻训练时风险很高；本身精瘦的人不适合这条路径。</li>
-      <li><strong>复涨常见</strong>：停止后体重回升普遍。有意思的是，<strong>恢复进食期的长度很重要</strong>——研究中 6 周的再喂养期相比 1 周，复涨显著更少（3.9% vs 更高）。</li>
-      <li><strong>副作用</strong>：便秘、头晕、胆结石等；营养素不足风险；往往需要医疗监督；极端限能量会损害训练表现与依从性。</li>
-      <li><strong>适用范围</strong>：主要用于需要快速减重的重度肥胖（如术前准备、医学监督下的治疗）。</li>
-    </ul>
-
-    <div class="callout">
-      <div class="h">研究者的一句关键提醒</div>
-      早期快速掉秤在肥胖人群中<em>可能</em>提高长期成功率（动机效应），但这条收益必须与瘦体重流失的风险一起权衡——而瘦体重正是本研究反复强调的「高质量减重」的核心。
-    </div>
+  <div class="tw" style="margin-top:12px">
+    <table class="log-tbl" id="logTable">
+      <thead><tr><th>周</th><th>体重(kg)</th><th>腰围(cm)</th><th>体脂(%)</th><th>变化</th><th></th></tr></thead>
+      <tbody></tbody>
+    </table>
   </div>
+  <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center">
+    <button class="btn sm" id="addRow">＋ 加一行</button>
+    <button class="btn sm" id="fillWeeks">按 12 周补齐</button>
+    <span class="pill" style="margin-left:auto">体重建议取 7 日均值</span>
+  </div>
+  <canvas id="chart"></canvas>
+  <div class="tip">记录规则（论文）：<b>每周固定一天、同样条件</b>（晨起、空腹、排便后、同一台秤）。单日波动不代表失败，看趋势。</div>
 </section>
 
-<section id="if">
-  <div class="wrap">
-    <h2><span class="num">04</span> 持续 vs 间歇：所有禁食法的底牌是同一个</h2>
-    <p class="lead">隔日禁食、5:2、16:8 限时进食……这些方案在营销上差别很大，但当<strong>总能量摄入被匹配</strong>后，减重和体成分结果几乎没差别。</p>
-
-    <h3>三类主流间歇方案</h3>
-    <ul>
-      <li><strong>隔日禁食（ADF）</strong>：禁食日摄取约维持热量的 25%（≈500 kcal），进食日不限。多数试验实际用的是这种「改良 ADF」。</li>
-      <li><strong>每周两次断食（TWF / 5:2）</strong>：每周两天低热量，其余按习惯吃。</li>
-      <li><strong>限时进食（TRE）</strong>：把每天的进食窗口压缩到 <mark>4–10 小时</mark>，不必然限制热量。早段 TRE 在血糖控制上表现更好。</li>
-    </ul>
-
-    <h3>证据给出的数字</h3>
-    <ul>
-      <li>6 个月时，禁食策略相比持续限能量多减 <strong>0.94 kg 体重、1.08 kg 脂肪</strong>——统计显著，但声明明确判定为<strong>没有临床意义</strong>。</li>
-      <li>ADF 在 2–6 个月的试验中减重 <strong>3%–7%</strong>；2–26 周的研究范围内为 0.77%–12.97%。</li>
-      <li>TRE 的减重范围 0.95%–8.60%，TWF 为 1.70%–7.97%。</li>
-      <li>当能量缺口被精确匹配时差别更明显——但方向出乎意料：每日限能量组<strong>92% 的减重来自脂肪</strong>，而严格隔日禁食组只有 <strong>46%</strong>，其余来自瘦体重。</li>
-      <li>4:3 模型（每周 3 个改良禁食日，约维持热量的 20%）比每日限能量多减 <strong>2.89 kg</strong>，但瘦体重也多掉 1.2 kg——该试验没有安排抗阻训练，且两组蛋白摄入都偏低（约 15% 热量、0.6 g/kg）。</li>
-      <li>汇总来看，ADF 与 TWF 试验在 12 周时平均丢失约 <strong>2 kg 瘦体重</strong>；涉及 8 项试验（4–12 周）的分析显示，加入<strong>抗阻训练</strong>可以缓解这一问题。</li>
-    </ul>
-
-    <div class="callout green">
-      <div class="h">怎么选</div>
-      如果你喜欢「不用每天算热量」的简单规则，间歇禁食是好工具；如果它的代价是蛋白吃不够、训练掉质量，那就不划算。<strong>选能长期坚持 + 能保证蛋白和抗阻训练的那一种。</strong>另外，日内进食频次本身对减重影响微小，运动员把蛋白分到 ≥3 餐即可。
-    </div>
+<section>
+  <div class="sec-head"><div class="n">4</div><div class="t">数据管理</div><div class="hint">本地保存</div></div>
+  <p class="sub" style="margin-bottom:10px">所有内容存在你这台设备的浏览器里。换设备、清缓存前请先导出备份。</p>
+  <div style="display:flex;gap:8px;flex-wrap:wrap">
+    <button class="btn sm" id="exportBtn">⬇ 导出备份(JSON)</button>
+    <button class="btn sm" id="importBtn">⬆ 导入备份</button>
+    <button class="btn sm" id="printBtn">🖨 打印 / 存 PDF</button>
+    <button class="btn sm danger" id="clearBtn">清空全部数据</button>
+    <input type="file" id="importFile" accept="application/json" style="display:none">
   </div>
-</section>
-
-<section id="macro">
-  <div class="wrap">
-    <h2><span class="num">05</span> 宏量营养素：蛋白是主角，碳脂比例是配角</h2>
-    <p class="lead">这是整份声明里信息密度最高、也最实用的一节。核心结论：蛋白摄入量有明确最优区间，而碳水与脂肪怎么分配，可以随个人喜好。</p>
-
-    <h3>为什么蛋白特殊：食物的热效应</h3>
-    <p>蛋白的食物热效应（TEF）约 <strong>20%–30%</strong>，碳水约 5%–10%，脂肪只有 0%–3%。也就是说同样标称 100 kcal，蛋白真正被身体利用的比例更低，同时还带来更强的饱腹感。</p>
-    <p>一项汇总 <strong>54 项随机对照试验</strong>的分析显示：高蛋白饮食（占总能量 20%–45%）在体重下降、脂肪减少以及收缩压、总胆固醇、甘油三酯、胰岛素等指标上，优于低蛋白对照组。</p>
-
-    <h3>蛋白质摄入阶梯（本声明的核心数字）</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>人群 / 目标</th><th>每日蛋白（g/kg 体重）</th><th>依据与说明</th></tr></thead>
-        <tbody>
-          <tr><td>长期沿用的 RDA</td><td>0.8</td><td>足以满足健康久坐成人的基本需求，但对维持或最大化瘦体重<strong>很可能不足</strong></td></tr>
-          <tr><td>一般人群 / 支持运动与预防</td><td>1.2–1.6</td><td>有益于肌肉骨骼、肠道菌群与心血管代谢健康；2025–2030 美国膳食指南首次明确写入该区间</td></tr>
-          <tr><td>减脂期 + 抗阻训练</td><td>1.6–2.2</td><td>可优化肌肉蛋白合成，减少瘦体重流失</td></tr>
-          <tr><td>精瘦 + 有训练基础（热量缺口下）</td><td>1.9–3.2</td><td>或按去脂体重计 2.5–4.2 g/kg FFM，与更好的瘦体重保留相关</td></tr>
-          <tr><td>追求「重组」（同时增肌减脂）</td><td>2.6–3.5（按 FFM 计）</td><td>可提高重组发生的概率与幅度，但重组是有限过程，越精瘦越难</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>碳水 vs 脂肪</h3>
-    <ul>
-      <li><strong>低脂（20%–35% 能量）</strong>：限能量时有效，长期效果与低碳相当，没有稳定优势。</li>
-      <li><strong>极低脂（10%–20% 能量）</strong>：能减重并改善心血管风险因素，但长期减脂没有优势，依从性可能较差。</li>
-      <li><strong>低碳（50–150 g/天或 ≤45% 能量）</strong>：短期减重优于低脂，可能改善血糖与饱腹感；但<strong>12–24 个月后优势消失</strong>，当热量与蛋白被匹配后收益基本消失。</li>
-      <li><strong>生酮（≤50 g/天或 ≤10% 能量）</strong>：短期有效、抑制食欲、增加脂肪氧化；但热量与蛋白匹配后没有内在减脂优势，瘦体重下降更多，LDL 胆固醇常升高，酮适应期症状常见，长期依从性差。</li>
-    </ul>
-
-    <div class="callout red">
-      <div class="h">最容易踩的坑</div>
-      把「生酮有效」理解成「生酮更有效」。声明的结论是：<strong>生酮在短期减重上确实有效，但在蛋白和热量匹配的前提下，没有内在的减脂优势，且瘦体重流失更多。</strong>如果你选择它，必须同时监控瘦体重与血脂。
-    </div>
-  </div>
-</section>
-
-<section id="adapt">
-  <div class="wrap">
-    <h2><span class="num">06</span> 减重的生理适应：为什么越减越难</h2>
-    <p class="lead">减重从来不是纯数学。身体会在三个层面同时下调支出，并上调饥饿信号——但声明同样指出，这些适应<strong>不是不可避免的</strong>，而且被长期高估了。</p>
-
-    <h3>物理层面：体重轻了，动起来更省</h3>
-    <ul>
-      <li>减掉 <strong>21% 体重（20.9 kg）</strong>的人，走路的能量成本下降 <strong>25%–38%</strong>。</li>
-      <li>体重降 6 kg，走路能量成本下降约 22%。</li>
-      <li>减重 13% 时，活动能量消耗（AEE）下降约 <strong>143 kcal</strong>。66 名受试者中只有 5 人克服了这一下降——代价是每天减少 2 小时久坐、增加 50 分钟站立、30 分钟步行和 5 分钟骑车。</li>
-    </ul>
-
-    <h3>生理层面：静息代谢的下调，有一部分「解释不了」</h3>
-    <ul>
-      <li>瘦体重是静息能量消耗（REE）最强的决定因素，可解释个体间差异的 <strong>60%–80%</strong>。骨骼肌约占瘦体重的一半，但只贡献约 30% 的 REE——肌肉静息时约 <mark>13 kcal/kg/天</mark>，而肝、脑、心、肾在静息时的代谢强度是骨骼肌的 15–30 倍。</li>
-      <li>一项 12 个月、25% 能量缺口、109 人的研究：体重降约 11%（8 kg）后，静息代谢率（RMR）下降约 <strong>100 kcal（≈7%）</strong>。其中只有 <strong>60%（60 kcal）</strong>能由瘦体重与脂肪的减少解释，剩下 <strong>40%（40 kcal）</strong>属于代谢适应。</li>
-      <li>适应性产热（AT）常被引用为「比预测值多降 10%–15%」，但声明明确指出这<strong>很可能是显著高估</strong>，尤其在体重稳定的状态下。</li>
-      <li>极端案例（减重竞赛类研究）：30 周平均减重 58.3 kg 后，实测 REE 比预测低 <strong>275 kcal</strong>，显示出明显的 AT。</li>
-    </ul>
-
-    <h3>行为与食欲层面</h3>
-    <ul>
-      <li>体重下降 <strong>6%–7%</strong> 即可观察到饥饿素（ghrelin）升高、PYY 与 GLP-1 下降——这是「越减越饿」的生理基础，不是意志力问题。</li>
-      <li>自报热量摄入普遍低报：超重/肥胖人群低报 <strong>25%–50%</strong>；即便是成功维持减重的人，也低报约 25.3%；连营养师自己都低报了 10.3%。</li>
-    </ul>
-
-    <div class="callout green">
-      <div class="h">这条结论为什么重要</div>
-      减重后代谢下降是真实的，但幅度常被夸大；而「吃得比记录的多」也是真实的。两者叠加，就是「我明明没吃多少却不掉秤」的常见解释。<strong>解法是提高支出（训练 + 日常活动量）+ 提高蛋白 + 定期给身体稳定期</strong>，而不是继续往下砍热量。
-    </div>
-  </div>
-</section>
-
-<section id="plateau">
-  <div class="wrap">
-    <h2><span class="num">07</span> 平台期：它不是失败，是提示</h2>
-    <p class="lead">声明把平台期单独作为一节，因为它是绝大多数人放弃的地方。</p>
-    <ul>
-      <li>各种饮食法的减重通常在<strong>前 8–12 周</strong>顺利，之后进度放缓并最终停滞。</li>
-      <li>有学者把「平台」定义为：<strong>12 周内体重下降不足 5%</strong>。这个定义本身就说明：短期不动 ≠ 失败。</li>
-      <li>突破手段很多（调整缺口、增加活动量、重新评估摄入、检查蛋白与训练），但声明强调平台期同样是一个<strong>练习维持的时机</strong>——最终目标是「守住平台」，而非无限下降。</li>
-      <li>两个可操作的工具：
-        <ul>
-          <li><strong>饮食休息（diet break）</strong>：每减掉 <mark>3–5 kg</mark>，安排约 <strong>7 天</strong>的「不严格限制但有意识地吃」，专注饥饿与饱腹感信号。</li>
-          <li><strong>维持期（maintenance phase）</strong>：每减 <mark>5–10 kg</mark>，安排约 <strong>1–3 个月或更长</strong>的体重稳定期，频率按个人需要。</li>
-        </ul>
-      </li>
-    </ul>
-    <div class="callout">
-      <div class="h">反直觉的证据</div>
-      减重竞赛类研究里，受试者在有监督结构与高强度活动的条件下减掉了起始体重的 <strong>35%</strong>，其中 <strong>72% 来自脂肪</strong>——说明大幅度减重是可以做到的，但前提是训练量、蛋白与监督同时到位，而不是单纯把饭量砍半。
-    </div>
-  </div>
-</section>
-
-<section id="tables">
-  <div class="wrap">
-    <h2><span class="num">08</span> 三张实用对照表</h2>
-
-    <h3>表 A · 各类饮食法：特点、优势、代价、适用人群</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>方案</th><th>核心特征</th><th>优势</th><th>代价 / 局限</th><th>适用</th></tr></thead>
-        <tbody>
-          <tr><td>VLED<br>极低能量饮食</td><td>全代餐，400–800 kcal/天，8–16 周后逐步恢复真实食物</td><td>短期减重最快（常达体重 10%–15%）；改善心血管代谢风险；早期快速下降可能提升长期成功率</td><td>瘦体重与骨量流失风险高（若缺蛋白/抗阻训练）；停后复涨常见；便秘、头晕、胆结石；不适合精瘦人群；营养素不足；常需医疗监督</td><td>重度肥胖需快速减重（术前或医学监督治疗）</td></tr>
-          <tr><td>LED<br>低能量饮食</td><td>800–1200 kcal/天，部分或全代餐</td><td>减重幅度大但烈度低于 VLED；过渡到长期饮食更容易</td><td>瘦体重流失仍存；长期结局与更温和方案类似；营养素不足；过于激进影响训练与依从性</td><td>需要较大但不极端的缺口的临床体重管理</td></tr>
-          <tr><td>PSMF<br>蛋白保留改良禁食</td><td>VLED 的高蛋白版，约 1.5–2.0 g/kg（可更高）</td><td>瘦体重保留优于常规 VLED；脂肪下降快</td><td>仍需医疗监督；极端限能量损害训练与依从；不适合精瘦人群；营养素不足</td><td>肥胖且需快速减脂同时尽量保肌</td></tr>
-          <tr><td>间歇禁食<br>（总类）</td><td>禁食与进食交替，含 ADF、5:2、TRE</td><td>与持续限能量效果相当；规则简单，可能免去算热量</td><td>能量匹配时无临床意义优势；保肌仍取决于蛋白与抗阻训练</td><td>偏好结构化禁食节奏、不愿每天算热量的人</td></tr>
-          <tr><td>ADF<br>隔日禁食</td><td>禁食日（约 25% 摄入）与自由进食日交替</td><td>短期减重可能略优于其他间歇方案</td><td>瘦体重流失风险更高（缺口更集中）；依从性挑战大；4:3 模型可能更可行且效果相近</td><td>能接受整日禁食、追求规则简单的人</td></tr>
-          <tr><td>5:2<br>每周两次断食</td><td>每周 2 个低热量日，其余按习惯</td><td>有效且灵活，结局与持续限能量相近</td><td>对体成分或健康结局没有稳定优势</td><td>偏好间歇而非每日限制的人</td></tr>
-          <tr><td>TRE<br>限时进食</td><td>每日进食窗压缩到 4–10 小时</td><td>执行简单；不刻意限热量也能自发减少摄入；早段 TRE 血糖控制更好</td><td>长期看没有超出热量缺口的独立代谢优势；效果取决于自发减少的能量</td><td>偏好用餐时间管理而非计算热量的人</td></tr>
-          <tr><td>高蛋白饮食</td><td>≥1.2–1.6 g/kg；减脂或训练期常 1.6–2.2 g/kg，精瘦训练者可 1.9–3.1 g/kg</td><td>提高饱腹感与食物热效应；减脂同时保肌；支持肌肉蛋白合成；健康人群在很宽范围内安全</td><td>久坐人群可能无需很高；益处依赖抗阻训练与总能量平衡</td><td>减重计划、运动员、抗阻训练者、老年人、任何优先保肌的人</td></tr>
-          <tr><td>VLFD<br>极低脂</td><td>脂肪占 10%–20% 能量</td><td>可减重并改善心血管风险因素</td><td>长期减脂无优势；依从性差；证据基础相对有限</td><td>偏好以植物性为主、低脂饮食模式的人</td></tr>
-          <tr><td>LFD<br>低脂</td><td>脂肪 20%–35% 能量，碳水较高</td><td>限能量时有效，长期与低碳相当</td><td>没有稳定优势；依从性随时间下降</td><td>寻求常规、指南式减重饮食的普通人群</td></tr>
-          <tr><td>LCD<br>低碳</td><td>碳水 50–150 g/天或 ≤45% 能量，不刻意生酮</td><td>短期减重优于低脂；可能改善血糖与饱腹感</td><td>12–24 个月后优势消失；热量与蛋白匹配时收益基本消失</td><td>偏好限制碳水者，尤其肥胖或糖代谢受损人群</td></tr>
-          <tr><td>KD<br>生酮</td><td>碳水 ≤50 g/天或 ≤10% 能量，进入营养性酮症</td><td>短期减重减脂有效；抑制食欲；脂肪氧化增加；可能改善血糖</td><td>蛋白与热量匹配时无内在减脂优势；瘦体重流失更多；LDL 常升高；酮适应症状常见；长期依从难</td><td>强烈偏好限制碳水或需要营养性酮症者，需密切监控瘦体重与血脂</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>表 B · 健康体脂率参考（声明汇总多项研究）</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>来源 / 方法</th><th>男性</th><th>女性</th><th>说明</th></tr></thead>
-        <tbody>
-          <tr><td>Abernathy &amp; Black</td><td>12%–20%</td><td>20%–30%</td><td>较早提出的健康区间，仍可作为合理参考</td></tr>
-          <tr><td>Kyle 等（FFM 指数法）</td><td>10.8%–21.7%</td><td>21.7%–33.2%</td><td>方法学更严谨，区间略宽</td></tr>
-          <tr><td>Salmon-Gomez 等（分层阈值）</td><td>偏低 &lt;10%，正常 10–&lt;20%，超重 20–&lt;25%，肥胖 ≥25%</td><td>偏低 &lt;20%，正常 20–&lt;30%，超重 30–&lt;35%，肥胖 ≥35%</td><td>用分类阈值替代单一区间</td></tr>
-          <tr><td>Jayedi 等（35 项队列，剂量反应）</td><td>全因死亡率最低点约 22%</td><td>约 35%</td><td>这是死亡率谷值，不等于推荐目标</td></tr>
-          <tr><td>Potter 等（NHANES 代谢综合征阈值）</td><td>无 MetSyn &lt;18%；超重阈 25%；肥胖阈 30%</td><td>无 MetSyn &lt;30%；超重阈 36%；肥胖阈 42%</td><td>用结局指标替代 BMI 定义</td></tr>
-          <tr><td><strong>综合建议</strong></td><td><strong>约 11%–22%</strong></td><td><strong>约 20%–35%</strong></td><td>基于上述证据的近似健康目标区间</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>表 C · 减重幅度与健康收益</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>减重幅度</th><th>可获得的健康收益（声明引用）</th></tr></thead>
-        <tbody>
-          <tr><td>2%–5%</td><td>改善血糖控制、降低甘油三酯</td></tr>
-          <tr><td>5%–10%</td><td>改善血压、减轻关节疼痛、提升活动能力、增加肠道菌群多样性、减轻抑郁症状、降低心血管死亡风险</td></tr>
-          <tr><td>约 15%</td><td>已有研究报告 2 型糖尿病缓解</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section id="plan">
-  <div class="wrap">
-    <h2><span class="num">09</span> 12 周减重计划表</h2>
-    <p class="lead">下面这张表不是论文原文，而是<strong>依据本声明的结论</strong>整理的可执行方案。它把声明里的关键变量（缺口大小、蛋白区间、抗阻训练、diet break、维持期）落成了 12 周的节奏。</p>
-    <div class="callout green">
-      <div class="h">配套可下载表格</div>
-      页面底部提供 <strong>Excel 版计划表 + 记录表</strong>（7 个工作表：12 周计划、体重围度记录、饮食记录、训练记录、参考值、自动计算器）。也可以直接从 GitHub 取：<a href="https://github.com/acloudpeng/issn-2026-weight-loss" target="_blank" rel="noopener">github.com/acloudpeng/issn-2026-weight-loss</a>
-    </div>
-
-    <h3>先选路径</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>路径</th><th>适合谁</th><th>能量缺口</th><th>蛋白目标</th><th>预期速度</th></tr></thead>
-        <tbody>
-          <tr><td>A · 稳妥型（推荐大多数人）</td><td>一般人群、久坐或轻度活动、首次系统减重</td><td>维持热量的 20%–25%</td><td>1.4–1.6 g/kg</td><td>每周 0.5%–1% 体重</td></tr>
-          <tr><td>B · 运动型</td><td>有抗阻训练习惯、优先保肌与体成分</td><td>维持热量的 15%–20%</td><td>1.8–2.2 g/kg（精瘦者可 2.5+）</td><td>每周 0.4%–0.8% 体重，身材变化优先于秤</td></tr>
-          <tr><td>C · 激进型（须医学监督）</td><td>BMI ≥ 30 或医生评估需要快速减重</td><td>LED 800–1200 kcal/天，或 VLED&lt;800 kcal 8–16 周</td><td>1.5–2.0 g/kg（PSMF 可选）</td><td>每周 1.5–2.5 kg（VLED 期）</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="callout red">
-      <div class="h">关于路径 C</div>
-      声明明确：VLED/LED 属于「高风险高收益」策略，用途主要限于<strong>需要快速减重的临床场景</strong>，并建议医疗监督；不配合足量蛋白与抗阻训练时，瘦体重与骨量流失风险很高。不在医生指导下，不建议自行进入这一档。
-    </div>
-
-    <h3>12 周逐周安排（以路径 A 为模板）</h3>
-    <div class="table-wrap">
-      <table class="plan-week">
-        <thead><tr><th>周次</th><th>能量</th><th>蛋白</th><th>训练</th><th>本周任务 / 监测</th></tr></thead>
-        <tbody>
-          <tr><td>第 0 周<br>（打底）</td><td>按估算维持热量吃，不设缺口</td><td>1.2 g/kg 起步</td><td>抗阻 2 次；每天走 6000–8000 步</td><td>测基线：晨起空腹体重、腰围、臀围、拍正侧背照片；用 3 天饮食记录估算真实摄入（注意声明提醒：自报普遍低报 25%–50%）</td></tr>
-          <tr><td>第 1–2 周<br>（适应）</td><td>维持热量 −15%</td><td>1.4 g/kg，分 3 餐以上</td><td>抗阻 3 次（全身，复合动作优先）；有氧 2 次 25 分钟</td><td>只改两件事：蛋白达标 + 抗阻到位。每天记录体重取 7 日均值，不看单日波动</td></tr>
-          <tr><td>第 3–4 周<br>（主缺口）</td><td>维持热量 −20%</td><td>1.6 g/kg</td><td>抗阻 3 次（渐进加重）；有氧 2–3 次；步数 8000–10000</td><td>检查速度：周降幅 0.5%–1% 体重为合适；过快→加 100–150 kcal 碳水；完全不动→先查摄入记录而不是先砍热量</td></tr>
-          <tr><td>第 5–6 周<br>（加深）</td><td>维持热量 −22%～−25%</td><td>1.6–1.8 g/kg</td><td>抗阻 3–4 次；有氧 3 次</td><td>腰围比体重更重要；若力量明显下降或持续疲劳，说明缺口过大或蛋白不足</td></tr>
-          <tr><td>第 7 周<br>（diet break）</td><td><strong>回到维持热量，约 7 天</strong></td><td>保持 1.6 g/kg</td><td>抗阻照常，有氧减半</td><td>这是声明推荐的「饮食休息」：每减 3–5 kg 安排一次。目的是缓解心理疲劳 + 部分恢复代谢与训练表现，不是放纵</td></tr>
-          <tr><td>第 8–10 周<br>（第二轮缺口）</td><td>维持热量 −20%～−25%</td><td>1.6–2.0 g/kg（训练量大可到 2.2）</td><td>抗阻 3–4 次；有氧 2–3 次</td><td>进入易平台期（典型 8–12 周）：用腰围、照片、衣物松紧、训练重量综合判断，别只看秤</td></tr>
-          <tr><td>第 11–12 周<br>（收口 + 稳定）</td><td>逐步回到维持热量（缺口收窄至 −10%）</td><td>1.6 g/kg</td><td>抗阻 4 次，维持强度</td><td>进入维持期：声明建议每减 5–10 kg 安排 1–3 个月稳定期。此阶段目标是把体重「钉住」，再决定是否开启下一轮</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <h3>平台期应对决策树（来自声明的第 13 条与相关章节）</h3>
-    <ol>
-      <li><strong>先验证数据，再砍热量。</strong>连续 2 周体重 7 日均值不变，先核对自己是否低报了摄入（声明：低报可达 25%–50%），并检查「偷吃液体热量」。</li>
-      <li><strong>提高支出而不是继续减食。</strong>优先加日常活动量（步数、站立时间）与抗阻训练强度——这正好对应声明中「AEE 下降需靠活动量补偿」的证据。</li>
-      <li><strong>保证蛋白与训练。</strong>蛋白不足时继续压热量，掉的主要是瘦体重。</li>
-      <li><strong>插入 diet break 或维持期。</strong>7 天饮食休息 / 1–3 个月维持期，让适应性产热衰减（声明：体重稳定后 AT 会显著减弱）。</li>
-      <li><strong>接受平台本身。</strong>12 周内减重 &lt;5% 才叫平台；守住成果本身就是成功。</li>
-    </ol>
-
-    <h3>一周训练模板（配合路径 A / B）</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>日</th><th>安排</th><th>要点</th></tr></thead>
-        <tbody>
-          <tr><td>周一</td><td>抗阻 A（下肢主导）：深蹲/腿举、罗马尼亚硬拉、腿弯举、提踵</td><td>每个动作 3–4 组，6–12 次；保持渐进超负荷</td></tr>
-          <tr><td>周二</td><td>有氧 30 分钟（快走/单车，中等强度）+ 步数 8000+</td><td>有氧服务于支出与心肺，不替代抗阻</td></tr>
-          <tr><td>周三</td><td>抗阻 B（上肢推）：卧推/肩推、三头、侧平举</td><td>蛋白分 3–4 餐摄入，训练后一餐含 30–40 g 蛋白</td></tr>
-          <tr><td>周四</td><td>休息或轻活动（散步、拉伸）</td><td>恢复也是方案的一部分</td></tr>
-          <tr><td>周五</td><td>抗阻 C（上肢拉 + 核心）：划船/引体、面拉、卷腹悬垂</td><td>拉类动作对体态与肩健康重要</td></tr>
-          <tr><td>周六</td><td>抗阻 D（下肢后链 + 全身复合）或运动项目</td><td>可作为「练质量」的一天，强度不必极高</td></tr>
-          <tr><td>周日</td><td>完全休息 + 备餐</td><td>对应声明第 15 条：提前规划与自制餐食是成功要素</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="callout">
-      <div class="h">监测指标建议（每周固定时间、同样条件）</div>
-      晨起空腹体重（取 7 日均值）· 腰围（肚脐水平）· 臀围 · 体脂率（同一设备同一时间）· 主要动作的训练重量与次数 · 睡眠与饥饿感评分。声明的立场是：<strong>减重质量看体成分与围度，不只看体重数字。</strong>
-    </div>
-  </div>
-</section>
-
-<section id="calc">
-  <div class="wrap">
-    <h2><span class="num">10</span> 个人热量与蛋白计算器</h2>
-    <p class="lead">按声明给出的蛋白区间与常见能量缺口范围做的简易估算工具。结果为<strong>起点估算</strong>，需按 2–4 周的实际变化校准。</p>
-
-    <div class="calc">
-      <div class="row">
-        <div><label>性别</label>
-          <select id="sex"><option value="m">男</option><option value="f">女</option></select></div>
-        <div><label>体重（kg）</label><input id="wt" type="number" value="75" min="30" max="250" step="0.5"></div>
-        <div><label>身高（cm）</label><input id="ht" type="number" value="175" min="120" max="220"></div>
-        <div><label>年龄</label><input id="age" type="number" value="30" min="14" max="90"></div>
-        <div><label>活动水平</label>
-          <select id="act">
-            <option value="1.2">久坐（几乎不运动）</option>
-            <option value="1.375" selected>轻度（每周 1–3 次运动）</option>
-            <option value="1.55">中度（每周 3–5 次）</option>
-            <option value="1.725">高度（每周 6–7 次 / 体力工作）</option>
-          </select></div>
-        <div><label>目标路径</label>
-          <select id="path">
-            <option value="A" selected>A 稳妥型（−20%）</option>
-            <option value="B">B 运动型（−15%，高蛋白）</option>
-          </select></div>
-      </div>
-      <button class="btn" onclick="calcIt()">计算我的起点</button>
-
-      <div class="result" id="out">
-        <div class="res-grid">
-          <div class="res"><div class="big" id="r-bmr">—</div><div class="lbl">基础代谢 BMR（Mifflin-St Jeor）</div></div>
-          <div class="res"><div class="big" id="r-tdee">—</div><div class="lbl">估算维持热量 TDEE</div></div>
-          <div class="res"><div class="big" id="r-target">—</div><div class="lbl">每日目标热量</div></div>
-          <div class="res"><div class="big" id="r-prot">—</div><div class="lbl">每日蛋白目标（g）</div></div>
-          <div class="res"><div class="big" id="r-prot2">—</div><div class="lbl">高蛋白上限参考（g）</div></div>
-          <div class="res"><div class="big" id="r-rate">—</div><div class="lbl">预期减重速度（每周）</div></div>
-        </div>
-        <p class="small" style="margin-top:12px">蛋白区间依据声明：一般人群 1.2–1.6 g/kg；减脂配合抗阻训练 1.6–2.2 g/kg；精瘦且训练者可上探 1.9–3.2 g/kg。若你属于最后一种，请按上限取值。</p>
-      </div>
-    </div>
-
-    <script>
-    function calcIt(){
-      const sex=document.getElementById('sex').value;
-      const wt=parseFloat(document.getElementById('wt').value)||75;
-      const ht=parseFloat(document.getElementById('ht').value)||175;
-      const age=parseFloat(document.getElementById('age').value)||30;
-      const act=parseFloat(document.getElementById('act').value);
-      const path=document.getElementById('path').value;
-      const bmr = sex==='m' ? 10*wt+6.25*ht-5*age+5 : 10*wt+6.25*ht-5*age-161;
-      const tdee = bmr*act;
-      const deficit = path==='A' ? 0.20 : 0.15;
-      let target = tdee*(1-deficit);
-      if(target < bmr*1.1) target = bmr*1.1;      // 不低于 BMR 的 1.1 倍
-      const kcalDef = tdee-target;
-      const lossKg = (kcalDef*7)/7700;           // 约 7700 kcal / kg 脂肪
-      const pLo = path==='A' ? 1.4 : 1.8;
-      const pHi = path==='A' ? 1.6 : 2.2;
-      const fmt = n => Math.round(n).toLocaleString('en-US');
-      document.getElementById('r-bmr').textContent = fmt(bmr)+' kcal';
-      document.getElementById('r-tdee').textContent = fmt(tdee)+' kcal';
-      document.getElementById('r-target').textContent = fmt(target)+' kcal';
-      document.getElementById('r-prot').textContent = Math.round(pLo*wt)+'–'+Math.round(pHi*wt)+' g';
-      document.getElementById('r-prot2').textContent = Math.round(2.2*wt)+' g';
-      document.getElementById('r-rate').textContent = lossKg.toFixed(2)+' kg';
-      document.getElementById('out').classList.add('on');
-    }
-    </script>
-  </div>
-</section>
-
-<section id="limits">
-  <div class="wrap">
-    <h2><span class="num">11</span> 局限与常见误区</h2>
-
-    <h3>这份声明自身的边界</h3>
-    <ul>
-      <li><strong>不覆盖药物与手术</strong>：GLP-1 受体激动剂、减重手术完全不在讨论范围，因此不能拿它来和药物治疗做比较。</li>
-      <li><strong>人群偏向</strong>：主要面向「总体健康、身体活跃或运动人群」，同时参考了超重/肥胖者的临床研究，但不是针对特定疾病人群的临床指南。</li>
-      <li><strong>不是个体化医嘱</strong>：电子秤、饮食法、训练计划的最终选择，仍应根据个人健康状况由专业人士给出。</li>
-    </ul>
-
-    <h3>声明直接反驳的四个流行说法</h3>
-    <div class="table-wrap">
-      <table>
-        <thead><tr><th>流行说法</th><th>声明的结论</th></tr></thead>
-        <tbody>
-          <tr><td>「间歇禁食有独特的代谢优势」</td><td>在能量摄入匹配的前提下，与每日限能量在体重与体成分上没有临床意义的差别。</td></tr>
-          <tr><td>「生酮减脂更高效」</td><td>短期减重有效，但蛋白与热量匹配后无内在减脂优势，且瘦体重下降更多、LDL 常升高。</td></tr>
-          <tr><td>「代谢被永久毁掉了，所以减不下来」</td><td>适应性产热真实存在但常被高估（常引用的 10%–15% 很可能是高估），且在体重稳定后显著减弱。</td></tr>
-          <tr><td>「平台期说明要更狠地砍热量」</td><td>先核对摄入记录（低报 25%–50%）、提高活动量与训练，必要时插入饮食休息与维持期；平台期本身也是守成果的时机。</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</section>
-
-<section id="ref">
-  <div class="wrap">
-    <h2><span class="num">12</span> 原文与引用</h2>
-    <div class="card">
-      <p style="margin-top:0"><strong>Aragon AA, Campbell BI, Schoenfeld BJ, Stout JR, Kalman D, Arciero PJ, Arent SM, Kreider RB, Taylor LW, Bannock L, Wildman REC, Kerksick CM, Antonio J.</strong><br>
-      <em>International Society of Sports Nutrition position stand: diets for body weight reduction.</em><br>
-      Journal of the International Society of Sports Nutrition. 2026;23(1):2740266.<br>
-      在线发表：2026 年 10 月 13 日 · DOI: 10.1080/15502783.2026.2740266 · PMID: 42867412 · PMCID: PMC13665703 · CC BY 开放获取</p>
-      <div class="dl">
-        <a href="https://github.com/acloudpeng/issn-2026-weight-loss/raw/master/plan/%E5%87%8F%E9%87%8D%E8%AE%A1%E5%88%92%E4%B8%8E%E8%AE%B0%E5%BD%95%E8%A1%A8.xlsx" target="_blank" rel="noopener">📊 下载减肥计划表 / 记录表（Excel，7 个工作表）</a>
-        <a href="https://github.com/acloudpeng/issn-2026-weight-loss/raw/master/data/ISSN-2026-position-stand-diets-for-weight-reduction.pdf" target="_blank" rel="noopener">📄 下载原文 PDF（3.4 MB，CC BY）</a>
-        <a href="https://github.com/acloudpeng/issn-2026-weight-loss/raw/master/data/fulltext.txt" target="_blank" rel="noopener">📝 查看原文纯文本</a>
-        <a href="https://doi.org/10.1080/15502783.2026.2740266" target="_blank" rel="noopener">🔗 DOI 原始页面</a>
-        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13665703/" target="_blank" rel="noopener">🔗 PMC 全文</a>
-        <a href="https://github.com/acloudpeng/issn-2026-weight-loss" target="_blank" rel="noopener">⭐ GitHub 仓库</a>
-      </div>
-      <p class="small" style="margin-bottom:0;margin-top:14px">本站为个人学习整理的中文精读与延伸计划，非官方译本。所有事实与数字均取自上述原文；计划表部分为基于原文结论的整理，非原文内容。若需引用，请以原文为准。</p>
-    </div>
-
-    <div class="callout" style="margin-top:20px">
-      <div class="h">免责声明</div>
-      本页内容仅供健康科普与学习参考，不构成医疗建议、诊断或治疗方案。开始任何减重方案（尤其是极低能量饮食）前，请咨询医生或注册营养师；有慢性病、进食障碍史、孕期或哺乳期人群请勿自行套用页面中的计划表。
-    </div>
-  </div>
+  <div class="tip warn" style="margin-top:12px"><b>隐私：</b>本页没有后端、不会上传。数据仅此浏览器可见；清除浏览器数据会一并删除。</div>
 </section>
 
 <footer>
-  <div class="wrap">
-    <div>减重科学 · 文献精读 · 内容基于 JISSN 2026;23(1) 立场声明整理</div>
-    <div><span class="badge">豫ICP备2026019608号-1</span></div>
-  </div>
+  <div>计划逻辑依据：Aragon AA et al. <i>ISSN position stand: diets for body weight reduction</i>. JISSN 2026;23(1):2740266（CC BY）</div>
+  <div style="margin-top:6px">本页为个人执行模板，非医疗建议 · 极低能量饮食 / 慢性病 / 孕期请先咨询医生</div>
+  <div style="margin-top:10px"><span class="badge">豫ICP备2026019608号-1</span></div>
 </footer>
+</div>
 
+<script>
+(function(){
+  var KEY='jf-plan-v1';
+  var $=function(id){return document.getElementById(id);};
+  function money(n){ return Math.round(n).toLocaleString('en-US'); }
+  function f1(n){ return (Math.round(n*10)/10).toFixed(1); }
+  function num(v){ var n=parseFloat(v); return isFinite(n)?n:null; }
+
+  var S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:'',logs:[{w:0,wt:'',waist:'',bf:''}]};
+
+  function load(){
+    try{
+      var raw=localStorage.getItem(KEY);
+      if(raw){ var d=JSON.parse(raw); for(var k in d){ if(d.hasOwnProperty(k)) S[k]=d[k]; } }
+    }catch(e){}
+    if(!S.start){ S.start=new Date().toISOString().slice(0,10); }
+    if(!Array.isArray(S.logs)||!S.logs.length){ S.logs=[{w:0,wt:'',waist:'',bf:''}]; }
+  }
+  function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+  function calc(){
+    var sex=S.sex, wt=parseFloat(S.wt), ht=parseFloat(S.ht), age=parseFloat(S.age), act=parseFloat(S.act)||1.375;
+    if(!wt||!ht||!age) return null;
+    var bmr = sex==='m' ? 10*wt+6.25*ht-5*age+5 : 10*wt+6.25*ht-5*age-161;
+    var tdee = bmr*act, deficit, pLo, pHi, label;
+    if(S.path==='B'){ deficit=0.15; pLo=1.8; pHi=2.2; label='B 运动型'; }
+    else if(S.path==='C'){ deficit=0.30; pLo=1.5; pHi=2.0; label='C 激进型'; }
+    else { deficit=0.225; pLo=1.4; pHi=1.6; label='A 稳妥型'; }
+    var target = tdee*(1-deficit);
+    if(S.path==='C'){ target=Math.min(Math.max(target,800),1200); }
+    else if(target < bmr*1.1){ target=bmr*1.1; }
+    var weeklyLoss=(tdee-target)*7/7700;
+    var goalW=parseFloat(S.goal)||null;
+    var goalLoss=goalW?(wt-goalW):null;
+    var weeks=(goalLoss&&goalLoss>0&&weeklyLoss>0)?Math.ceil(goalLoss/weeklyLoss):null;
+    return {bmr:bmr,tdee:tdee,target:target,label:label,weeklyLoss:weeklyLoss,goalLoss:goalLoss,weeks:weeks,
+            protLo:Math.round(wt*pLo),protHi:Math.round(wt*pHi)};
+  }
+
+  function renderMetrics(){
+    var c=calc(), box=$('metrics'), tip=$('targetTip');
+    if(!c){
+      box.innerHTML='<div class="empty" style="grid-column:1/-1">填上年龄、身高、体重后自动计算</div>';
+      tip.style.display='none'; return;
+    }
+    var items=[
+      ['基础代谢 BMR', money(c.bmr)+' kcal'],
+      ['维持热量 TDEE', money(c.tdee)+' kcal'],
+      ['每日目标热量', money(c.target)+' kcal'],
+      ['每日蛋白', c.protLo+'–'+c.protHi+' g'],
+      ['每餐蛋白参考', Math.round(c.protLo/3)+'–'+Math.round(c.protHi/3)+' g'],
+      ['预计减重速度', c.weeklyLoss.toFixed(2)+' kg/周']
+    ];
+    box.innerHTML=items.map(function(it){ return '<div class="metric"><div class="big">'+it[1]+'</div><div class="lbl">'+it[0]+'</div></div>'; }).join('');
+    tip.style.display='block';
+    if(c.goalLoss&&c.goalLoss>0){
+      tip.innerHTML='<b>'+c.label+'</b>：从 '+S.wt+' kg 到 '+S.goal+' kg，需减 <b>'+f1(c.goalLoss)+' kg</b>，按当前速度约 <b>'+c.weeks+' 周</b>（约 '+(c.weeks/4.3).toFixed(1)+' 个月）。'+
+        (c.weeks>12?'超过 12 周属正常——论文建议每减 5–10 kg 插入 1–3 个月维持期再进下一轮。':'12 周内可达。');
+    } else if(c.goalLoss!==null && c.goalLoss<=0){
+      tip.innerHTML='目标体重不低于当前体重，先设一个更具体的目标。';
+    } else {
+      tip.innerHTML='论文口径：<b>每周掉 0.5%–1% 体重</b>是稳妥区间；缺口越大掉得越快，瘦体重流失风险也越高。';
+    }
+    if(S.path==='C'){ tip.innerHTML+='<br><b>激进型（LED 800–1200 kcal）高风险高收益，论文要求医学监督，请勿自行长期执行。</b>'; }
+  }
+
+  var PLAN=[
+    {w:'第 0 周', k:0, kcal:'≈TDEE', prot:1.2, train:'抗阻 2 次 · 步数 6000–8000', task:'测基线：晨起空腹体重、腰围、臀围、照片；3 天饮食记录估真实摄入'},
+    {w:'第 1–2 周', k:1, kcal:'−15%', prot:1.4, train:'抗阻 3 次（全身复合）· 有氧 2×25 分', task:'只改两件事：蛋白达标 + 抗阻到位；体重取 7 日均值'},
+    {w:'第 3–4 周', k:3, kcal:'−20%', prot:1.6, train:'抗阻 3 次（渐进加重）· 步数 8000–10000', task:'周降幅 0.5%–1% 为合适；不动先查摄入记录，别急砍热量'},
+    {w:'第 5–6 周', k:5, kcal:'−22%', prot:1.7, train:'抗阻 3–4 次 · 有氧 3 次', task:'腰围比体重重要；力量明显下降 = 缺口过大或蛋白不足'},
+    {w:'第 7 周', k:7, kcal:'维持 7 天', prot:1.6, train:'抗阻照常 · 有氧减半', task:'diet break：每减 3–5 kg 安排一次，缓解心理疲劳与代谢适应'},
+    {w:'第 8–10 周', k:8, kcal:'−20%～−25%', prot:1.8, train:'抗阻 3–4 次 · 有氧 2–3 次', task:'易进平台期：腰围/照片/训练重量综合判断，别只看秤'},
+    {w:'第 11–12 周', k:11, kcal:'−10%', prot:1.6, train:'抗阻 4 次 · 维持强度', task:'进入维持期（1–3 个月）把体重钉住，再决定是否下一轮'}
+  ];
+
+  function dateOfWeek(off){
+    if(!S.start) return '—';
+    var d=new Date(S.start+'T00:00:00');
+    d.setDate(d.getDate()+off*7);
+    return (d.getMonth()+1)+'/'+d.getDate();
+  }
+
+  function kcalText(p,c){
+    if(!c) return p.kcal;
+    if(p.kcal==='≈TDEE') return '≈'+money(c.tdee)+' kcal';
+    if(p.kcal==='维持 7 天') return '≈'+money(c.tdee)+' kcal';
+    if(p.kcal.indexOf('−15')>=0) return '≈'+money(c.tdee*0.85)+' kcal';
+    if(p.kcal.indexOf('−20%～−25%')>=0) return '≈'+money(c.tdee*0.775)+' kcal';
+    if(p.kcal.indexOf('−22')>=0) return '≈'+money(c.tdee*0.78)+' kcal';
+    if(p.kcal.indexOf('−20')>=0) return '≈'+money(c.tdee*0.80)+' kcal';
+    if(p.kcal.indexOf('−10')>=0) return '≈'+money(c.tdee*0.90)+' kcal';
+    return p.kcal;
+  }
+
+  function renderPlan(){
+    var tb=$('planTable').querySelector('tbody'), c=calc();
+    var wt=parseFloat(S.wt)||null;
+    var curW=null;
+    if(S.start){
+      var st=new Date(S.start+'T00:00:00'), now=new Date();
+      var diff=Math.floor((now-st)/604800000);
+      if(diff>=0&&diff<12) curW=diff;
+    }
+    tb.innerHTML=PLAN.map(function(p,i){
+      var isNow = curW!==null && curW>=p.k && (i===PLAN.length-1 || curW<PLAN[i+1].k);
+      var prot = wt? Math.round(wt*p.prot)+' g/天' : p.prot+' g/kg';
+      if(p.w==='第 8–10 周'&&wt) prot=Math.round(wt*1.6)+'–'+Math.round(wt*2.0)+' g/天';
+      return '<tr class="'+(isNow?'now':'')+'"><td>'+p.w+(isNow?' ●':'')+'</td><td class="num">'+dateOfWeek(p.k)+
+        '</td><td class="num">'+kcalText(p,c)+'</td><td>'+prot+'</td><td>'+p.train+'</td><td>'+p.task+'</td></tr>';
+    }).join('');
+    $('planPills').innerHTML = c
+      ? '<span class="pill">方案 <b>'+c.label+'</b></span><span class="pill">蛋白 <b>'+c.protLo+'–'+c.protHi+' g/天</b></span><span class="pill">目标热量 <b>'+money(c.target)+' kcal</b></span>'+(c.weeks?'<span class="pill">预计 <b>'+c.weeks+' 周</b>达标</span>':'')
+      : '';
+  }
+
+  function renderLogs(){
+    var tb=$('logTable').querySelector('tbody'), rows=S.logs;
+    tb.innerHTML=rows.map(function(r,i){
+      var cur=num(r.wt), prev=i>0?num(rows[i-1].wt):null, delta='—';
+      if(cur!==null&&prev!==null){
+        var d=cur-prev;
+        delta='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>';
+      }
+      return '<tr><td style="color:var(--dim)">'+(r.w===0?'基线':'第'+r.w+'周')+'</td>'+
+        '<td><input data-i="'+i+'" data-k="wt" type="number" step="0.1" inputmode="decimal" value="'+(r.wt==null?'':r.wt)+'" placeholder="kg"></td>'+
+        '<td><input data-i="'+i+'" data-k="waist" type="number" step="0.1" inputmode="decimal" value="'+(r.waist==null?'':r.waist)+'" placeholder="cm"></td>'+
+        '<td><input data-i="'+i+'" data-k="bf" type="number" step="0.1" inputmode="decimal" value="'+(r.bf==null?'':r.bf)+'" placeholder="%"></td>'+
+        '<td class="num">'+delta+'</td>'+
+        '<td><button class="del" data-del="'+i+'">×</button></td></tr>';
+    }).join('');
+
+    Array.prototype.forEach.call(tb.querySelectorAll('input'),function(inp){
+      inp.addEventListener('input',function(e){
+        var i=+e.target.dataset.i, k=e.target.dataset.k;
+        S.logs[i][k]=e.target.value; save(); renderProgress(); drawChart();
+        var cell=e.target.closest('tr').children[4];
+        var cur=num(S.logs[i].wt), prev=i>0?num(S.logs[i-1].wt):null;
+        if(cur!==null&&prev!==null){ var d=cur-prev; cell.innerHTML='<span style="color:'+(d<0?'var(--green)':'var(--red)')+'">'+(d>0?'+':'')+d.toFixed(1)+'</span>'; }
+        else cell.textContent='—';
+      });
+    });
+    Array.prototype.forEach.call(tb.querySelectorAll('[data-del]'),function(b){
+      b.addEventListener('click',function(){
+        S.logs.splice(+b.dataset.del,1); save(); renderLogs(); renderProgress(); drawChart();
+      });
+    });
+    $('logHint').textContent=S.logs.filter(function(r){return num(r.wt)!==null;}).length+' 条有效记录';
+  }
+
+  function renderProgress(){
+    var valid=S.logs.filter(function(r){return num(r.wt)!==null;});
+    var startW=valid.length?num(valid[0].wt):(parseFloat(S.wt)||null);
+    var lastW=valid.length?num(valid[valid.length-1].wt):startW;
+    var goal=parseFloat(S.goal)||null;
+    $('pStart').textContent=startW?('起点 '+f1(startW)+' kg'):'起点 —';
+    $('pNow').textContent=lastW?('最新 '+f1(lastW)+' kg'+(startW?('　Δ '+(lastW-startW>0?'+':'')+f1(lastW-startW)+' kg'):'')):'最新 —';
+    var pct=0;
+    if(startW&&lastW&&goal&&startW>goal){ pct=Math.max(0,Math.min(100,(startW-lastW)/(startW-goal)*100)); }
+    $('pbarFill').style.width=pct.toFixed(1)+'%';
+  }
+
+  function drawChart(){
+    var cv=$('chart'), dpr=window.devicePixelRatio||1, w=cv.clientWidth||300, h=170;
+    cv.width=w*dpr; cv.height=h*dpr;
+    var ctx=cv.getContext('2d'); ctx.setTransform(dpr,0,0,dpr,0,0); ctx.clearRect(0,0,w,h);
+    var pts=S.logs.map(function(r,i){return {i:i,v:num(r.wt)};}).filter(function(p){return p.v!==null;});
+    var goal=parseFloat(S.goal)||null;
+    if(pts.length<2){
+      ctx.fillStyle='#6b7c91'; ctx.font='13px system-ui'; ctx.textAlign='center';
+      ctx.fillText('记录两次以上体重后显示趋势线', w/2, h/2); return;
+    }
+    var vals=pts.map(function(p){return p.v;}); if(goal) vals.push(goal);
+    var min=Math.min.apply(null,vals), max=Math.max.apply(null,vals);
+    var pad=(max-min)*0.25||2; min-=pad; max+=pad;
+    function X(i){ return 22+(w-44)*(pts.length>1?i/(pts.length-1):0); }
+    function Y(v){ return h-26-(h-46)*((v-min)/(max-min)); }
+    if(goal){
+      ctx.strokeStyle='rgba(56,189,248,.5)'; ctx.setLineDash([5,5]); ctx.beginPath();
+      ctx.moveTo(22,Y(goal)); ctx.lineTo(w-22,Y(goal)); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle='#38bdf8'; ctx.font='11px system-ui'; ctx.textAlign='left';
+      ctx.fillText('目标 '+f1(goal)+'kg', 22, Y(goal)-5);
+    }
+    ctx.strokeStyle='#4ade80'; ctx.lineWidth=2; ctx.beginPath();
+    pts.forEach(function(p,i){ var x=X(i),y=Y(p.v); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+    ctx.stroke();
+    pts.forEach(function(p,i){ ctx.fillStyle='#4ade80'; ctx.beginPath(); ctx.arc(X(i),Y(p.v),3.2,0,7); ctx.fill(); });
+    ctx.fillStyle='#95a6ba'; ctx.font='11px system-ui';
+    ctx.textAlign='left'; ctx.fillText(f1(pts[0].v), 22, h-8);
+    ctx.textAlign='right'; ctx.fillText(f1(pts[pts.length-1].v), w-22, h-8);
+  }
+
+  function bindFields(){
+    [['sex','sex'],['age','age'],['ht','ht'],['wt','wt'],['goal','goal'],['act','act'],['path','path'],['start','start']].forEach(function(pair){
+      var el=$(pair[0]);
+      el.value=(S[pair[1]]==null?'':S[pair[1]]);
+      var handler=function(){ S[pair[1]]=el.value; save(); renderMetrics(); renderPlan(); renderProgress(); };
+      el.addEventListener('input',handler);
+      el.addEventListener('change',handler);
+    });
+  }
+
+  $('addRow').addEventListener('click',function(){
+    var w=S.logs.length?((S.logs[S.logs.length-1].w||0)+1):0;
+    S.logs.push({w:w,wt:'',waist:'',bf:''}); save(); renderLogs(); renderProgress(); drawChart();
+  });
+  $('fillWeeks').addEventListener('click',function(){
+    var have={}; S.logs.forEach(function(r){have[r.w]=1;});
+    for(var i=0;i<=12;i++){ if(!have[i]) S.logs.push({w:i,wt:'',waist:'',bf:''}); }
+    S.logs.sort(function(a,b){return a.w-b.w;});
+    save(); renderLogs(); renderProgress(); drawChart();
+  });
+  $('printBtn').addEventListener('click',function(){ window.print(); });
+  $('clearBtn').addEventListener('click',function(){
+    if(confirm('清空所有本机数据？不可撤销，建议先导出备份。')){
+      localStorage.removeItem(KEY);
+      S={sex:'m',age:'',ht:'',wt:'',goal:'',act:'1.375',path:'A',start:new Date().toISOString().slice(0,10),logs:[{w:0,wt:'',waist:'',bf:''}]};
+      save(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+    }
+  });
+  $('exportBtn').addEventListener('click',function(){
+    var blob=new Blob([JSON.stringify(S,null,2)],{type:'application/json'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='减重计划备份-'+new Date().toISOString().slice(0,10)+'.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(a.href); },1500);
+  });
+  $('importBtn').addEventListener('click',function(){ $('importFile').click(); });
+  $('importFile').addEventListener('change',function(e){
+    var f=e.target.files[0]; if(!f) return;
+    var fr=new FileReader();
+    fr.onload=function(){
+      try{
+        var d=JSON.parse(fr.result);
+        for(var k in d){ if(d.hasOwnProperty(k)) S[k]=d[k]; }
+        if(!Array.isArray(S.logs)||!S.logs.length){ S.logs=[{w:0,wt:'',waist:'',bf:''}]; }
+        save(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+        alert('备份已导入');
+      }catch(err){ alert('文件格式不对'); }
+    };
+    fr.readAsText(f);
+  });
+  window.addEventListener('resize',drawChart);
+
+  load(); bindFields(); renderLogs(); renderMetrics(); renderPlan(); renderProgress(); drawChart();
+})();
+</script>
 </body>
 </html>
